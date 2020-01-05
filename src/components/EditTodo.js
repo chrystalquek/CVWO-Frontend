@@ -14,7 +14,7 @@ class edit extends Component {
       tag: '',
       category: '',
       duedate: '',
-      errors: ''
+      errors: []
      };
   }
 handleChange = (event) => {
@@ -35,35 +35,30 @@ handleSubmit = (event) => {
         duedate: duedate
     }
 
-const token = localStorage.getItem("token")
-  if (token){    
-    fetch('http://localhost:3001/auto_login', {
-        headers: {
-        Authorization: `Bearer ${token}`
-        }
-    })
-    .then(resp => resp.json())
-    .then(response => {
-      if (response.errors){
-        this.props.history.push(`/login`);
-      } else {
-        axios.put(`http://localhost:3001/api/users/${response.id}/todos/${this.props.todoid}`, {todo})
-            //.then(respon => respon.json())
-            .then(respons => {
+
+    
+
+    const token = localStorage.getItem("token")
+    const userid = localStorage.getItem("userid")
+    axios.put(`http://localhost:3001/api/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+            .then(response => {
+
+              if (response.data.errors) {
+            
+                this.setState({errors: response.data.errors});
+      
+              } else {
+
+
                 this.props.closePopup(0)();
-                //console.log(this.props.refresh)
                 
                 this.props.refresh();
+              }
                 
-            
-              //this.setState({ todos: respons.todos });
-              // will fix error catching later
-            }).catch(error => console.log(error))
+            })
        
         
-    }})
-    .catch(error => console.log('api errors:', error))
-    }}
+    }
 
 
 

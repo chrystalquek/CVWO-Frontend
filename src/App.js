@@ -11,44 +11,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-       todos: {},
+       
      };
      
   }
 componentDidMount() {
-  console.log("in app")
-
-  const token = localStorage.getItem("token")
-  if (token){    
-    fetch('http://localhost:3001/auto_login', {
-        headers: {
-        Authorization: `Bearer ${token}`
-        }
-    })
-    .then(resp => resp.json())
-    .then(response => {
-      if (response.errors){
-        this.props.history.push(`/login`);
-      } else {
-        fetch(`http://localhost:3001/api/users/${response.id}/todos`)
-            .then(respon => respon.json())
-            .then(respons => {
-            
-              this.setState({ todos: respons.todos });
-              // will fix error catching later
-            }).catch(error => console.log(error))
-       }
-        
-    })
-    .catch(error => console.log('api errors:', error))
-    }}
+  }
     //
     
   
 
   handleLogout = () => {
     localStorage.removeItem("token")
-    //this.context.history.push(`/`)
+    localStorage.removeItem("userid")
+    
   }
 
 // to check login status
@@ -96,7 +72,7 @@ render() {
             />
             <Route exact path="/todos" 
               render={props => (
-              <Todos {...props} handleLogout={this.handleLogout} todos={this.state.todos}/>
+              <Todos {...props} handleLogout={this.handleLogout} />
               )}
             />
             

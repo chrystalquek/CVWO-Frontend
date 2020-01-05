@@ -11,7 +11,7 @@ class Signup extends Component {
       email: '',
       password: '',
       password_confirmation: '',
-      errors: ''
+      errors: []
      };
   }
 handleChange = (event) => {
@@ -32,13 +32,19 @@ handleSubmit = (event) => {
     }
     axios.post('http://localhost:3001/api/users', {user}, {withCredentials: true})
         .then(response => {
+          if (response.data.errors) {
+            
+            this.setState({errors: response.data.errors});
+
+          } else {
         
             // relogin after creating user
             this.props.history.push('/login');
+          }
         })
         // to reimplement error catching
         .catch(error => console.log('api errors:', error))
-  };
+  }
 
 handleErrors = () => {
     return (

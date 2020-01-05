@@ -11,8 +11,7 @@ class Todos extends Component {
     constructor(props) {
       super(props);
       this.state = { 
-          // todos can be retrieved using refreshPage instead of props
-        todos: this.props.todos,
+        todos: {},
         showEditPopup: false,
         showNewPopup: false
        };
@@ -20,6 +19,7 @@ class Todos extends Component {
 
 
     componentDidMount() {
+        // option to refresh page (make an extra API call) for every new/update/delete) or directly work with array
         this.refreshPage()
     }
 
@@ -31,32 +31,23 @@ class Todos extends Component {
       })
     }
 
-    handleDelete = (todoid) => () => {
+    handleDelete = (todoid) =>  {
+        
         const token = localStorage.getItem("token")
-        if (token){    
-            fetch('http://localhost:3001/auto_login', {
-                headers: {
-                Authorization: `Bearer ${token}`
-                }
-            })
-            .then(resp => resp.json())
-            .then(response => {
-                if (response.errors){
-                    this.props.history.push(`/todos`);
-                } else {
-                    axios.delete(`http://localhost:3001/api/users/${response.id}/todos/${todoid}`, {withCredentials: true})
-                    .then(resp => {
+        const userid = localStorage.getItem("userid")
+        axios.delete(`http://localhost:3001/api/users/${userid}/todos/${todoid}`, { headers: {"Authorization" : `Bearer ${token}`} })
+      .then(response => {
+                    // axios.delete(`http://localhost:3001/api/users/${response.id}/todos/${todoid}`, {withCredentials: true})
+                    // .then(resp => {
                         //console.log(resp.todos)
                         // this.props.history.push(`/users/${this.props.id}/todos`)
                         // const index = this.state.todos.findIndex(todo => todo.id === todoid);
                         // console.log(index);
                         // this.state.todos.splice(index, 1);
                     this.refreshPage();
-                    }).catch(error => console.log(error))
+                    })
                 }
-            })
-        }
-    }
+            
             
     toggleEditPopup = (todoid) =>  () =>
     {
@@ -72,29 +63,49 @@ class Todos extends Component {
 
     refreshPage = () => {
         const token = localStorage.getItem("token")
-        if (token){    
-            fetch('http://localhost:3001/auto_login', {
-                headers: {
+        const userid = localStorage.getItem("userid")
+        
+
+        fetch(`http://localhost:3001/api/users/${userid}/todos`, {
+            headers: {
                 Authorization: `Bearer ${token}`
-                }
-            })
-            .then(resp => resp.json())
-            .then(response => {
-            if (response.errors){
-                this.props.history.push(`/login`);
-            } else {
-                fetch(`http://localhost:3001/api/users/${response.id}/todos`)
-                    .then(respon => respon.json())
-                    .then(respons => {
-                    
-                    this.setState({ todos: respons.todos });
-                    // will fix error catching later
-                    }).catch(error => console.log(error))
             }
+            // , body: JSON.stingify({
+            //     username,
+            //     password
+            // })
+        }).then(resp => resp.json())
+        .then(response => {
+            this.setState({ todos: response.todos });
+        })
+    }
+
+       
+
+
+        // if (token){    
+        //     fetch('http://localhost:3001/auto_login', {
+        //         headers: {
+        //         Authorization: `Bearer ${token}`
+        //         }
+        //     })
+        //     .then(resp => resp.json())
+        //     .then(response => {
+        //     if (response.errors){
+        //         this.props.history.push(`/login`);
+        //     } else {
+        //         fetch(`http://localhost:3001/api/users/${response.id}/todos`)
+        //             .then(respon => respon.json())
+        //             .then(respons => {
+                    
+        //             this.setState({ todos: respons.todos });
+        //             // will fix error catching later
+        //             }).catch(error => console.log(error))
+        //     }
                 
-            })
-            .catch(error => console.log('api errors:', error))
-            }}
+        //     })
+        //     .catch(error => console.log('api errors:', error))
+        //     }}
         
 
 handleErrors = () => {
@@ -109,6 +120,8 @@ handleErrors = () => {
       </div>
     )
   }
+
+  
 
   renderTableData() {
 
@@ -132,7 +145,14 @@ handleErrors = () => {
              <td>{tag[i]}</td>
              <td>{category[i]}</td>
              <td>{duedate[i]}</td>
-             <td><button onClick={this.handleDelete(id[i])}>Delete</button> 
+             {/* <td><button onClick={this.handleDelete(id[i])}>Delete</button>  */}
+
+             <td><button onClick={() => { if (window.confirm('Are you sure you wish to delete this Todo?')) this.handleDelete(id[i]) }}>Delete</button> 
+             
+
+
+             {/* <div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } /> */}
+
              <button onClick={this.toggleEditPopup(id[i])}> Update </button>  
 
                     {this.state.showEditPopup === id[i]?  
@@ -176,7 +196,7 @@ render() {
                     <NewPopup  
                     closePopup={this.toggleNewPopup.bind(this)} 
                     refresh={this.refreshPage.bind(this)}
-            />    
+                    />    
                     : null  
                     } 
             

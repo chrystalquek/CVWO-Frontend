@@ -9,7 +9,7 @@ class Login extends Component {
       super(props);
       this.state = { 
         username: '',
-        email: '',
+        // email: '',
         password: '',
         errors: ''
        };
@@ -31,25 +31,31 @@ class Login extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        const {username, email, password} = this.state
+        const {username, password} = this.state
     let user = {
           username: username,
-          email: email,
+          //email: email,
           password: password
         }
         // console.log(user);
         
         axios.post('http://localhost:3001/login', {user})
         .then(data => {
+          if (data.data.failure){
+            this.setState({errors: ["Username / Password Invalid"]})
+
+          } else {
             localStorage.setItem("token", data.data.jwt)
-            // localStorage.setItem("user", data.data.user.id)
+            localStorage.setItem("userid", data.data.userid)
             this.handleLogin()
+          }
         })
         .catch(error => console.log('api errors:', error))
       };
 
 
 handleErrors = () => {
+  
     return (
       <div>
         <ul>
@@ -65,7 +71,7 @@ handleErrors = () => {
 
 
 render() {
-    const {username, email, password} = this.state
+    const {username, password} = this.state
 return (
       <div class="outer">
         <h1>Log In</h1>
@@ -75,13 +81,6 @@ return (
             type="text"
             name="username"
             value={username}
-            onChange={this.handleChange}
-          />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
             onChange={this.handleChange}
           />
           <input

@@ -14,7 +14,7 @@ class edit extends Component {
       tag: '',
       category: '',
       duedate: '',
-      errors: ''
+      errors: []
      };
   }
 handleChange = (event) => {
@@ -25,45 +25,47 @@ handleChange = (event) => {
   };
 handleSubmit = (event) => {
   
-    event.preventDefault()
-    const {title, description, tag, category, duedate} = this.state
-    let todo = {
-        title: title,
-        description: description,
-        tag: tag,
-        category: category,
-        duedate: duedate
-    }
+  event.preventDefault()
+  const {title, description, tag, category, duedate} = this.state
+  const token = localStorage.getItem("token")
+  const userid = localStorage.getItem("userid")
+  let todo = {
+      title: title,
+      description: description,
+      tag: tag,
+      category: category,
+      duedate: duedate
+  }
 
-const token = localStorage.getItem("token")
-  if (token){    
-    fetch('http://localhost:3001/auto_login', {
-        headers: {
-        Authorization: `Bearer ${token}`
-        }
-    })
-    .then(resp => resp.json())
-    .then(response => {
-      if (response.errors){
-        this.props.history.push(`/login`);
-      } else {
-        axios.post(`http://localhost:3001/api/users/${response.id}/todos/`, {todo})
-            //.then(respon => respon.json())
-            .then(respons => {
-                this.props.closePopup();
-                //console.log(this.props.refresh)
-                
-                this.props.refresh();
-                
-            
-              //this.setState({ todos: respons.todos });
-              // will fix error catching later
-            }).catch(error => console.log(error))
-       
+
+      // fetch(`http://localhost:3001/api/users/${userid}/todos`, {
+      //     method: 'POST',
+      //     headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'application/json',
+      //       Authorization: `Bearer ${token}`
+      //     }
+      //     , 
+      //     body: JSON.stringify({todo})
+
+
+
+      axios.post(`http://localhost:3001/api/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+      .then(response => {
         
-    }})
-    .catch(error => console.log('api errors:', error))
-    }}
+        if (response.data.errors) {
+            
+          this.setState({errors: response.data.errors});
+
+        } else 
+        
+        {
+              this.props.closePopup();     
+              this.props.refresh();
+
+            // will fix error catching later
+      }})
+}
 
 
 
@@ -125,7 +127,7 @@ return (
           />
         
           <button placeholder="submit" type="submit">
-            Submit Changes
+            Create
           </button>
 
           
