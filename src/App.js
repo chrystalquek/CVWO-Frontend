@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import axios from 'axios'
 import {BrowserRouter, Switch, Redirect, Route} from 'react-router-dom'
+import Nav from './components/Nav';
 import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
@@ -11,20 +12,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
+      loggedIn : localStorage.getItem("token")
        
      };
      
   }
 componentDidMount() {
   }
-    //
     
   
 
   handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userid")
+    this.setState({loggedIn: false})
     
+  }
+
+  reset = () => {
+    this.setState({loggedIn: localStorage.getItem("token")})
   }
 
 // to check login status
@@ -44,16 +50,27 @@ componentDidMount() {
 //   }
 // }, [])
 
+// Home, Login, Signup
+// Home, Signout, Todos
+
 
 render() {
     return (
+
+
+<div>
+
+
       <div>
         <BrowserRouter>
+        <div>
+          <Nav      loggedIn={this.state.loggedIn} resetloggedIn={this.reset} handleLogout={this.handleLogout} />
+        
           <Switch>
             <Route 
               exact path='/' 
               render={props => (
-              <Home {...props} handleLogout={this.handleLogout}  
+              <Home {...props} handleLogout={this.handleLogout}  resetloggedIn={this.reset}
               //todos = {this.state.todos}
               />
               )}
@@ -61,7 +78,7 @@ render() {
             <Route 
               exact path='/login' 
               render={props => (
-              <Login {...props}   />
+              <Login {...props} resetloggedIn={this.reset}  />
               )}
             />
             <Route 
@@ -72,7 +89,7 @@ render() {
             />
             <Route exact path="/todos" 
               render={props => (
-              <Todos {...props} handleLogout={this.handleLogout} />
+              <Todos {...props}  />
               )}
             />
             
@@ -81,7 +98,9 @@ render() {
 
 
           </Switch>
+          </div>
         </BrowserRouter>
+      </div>
       </div>
     );
   }

@@ -26,6 +26,7 @@ class Login extends Component {
 
     handleLogin = () => {
         //direct to todos index using users.id
+        this.props.resetloggedIn();
         this.props.history.push(`/todos`);
     }
 

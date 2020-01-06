@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import EditPopup from "./EditTodo"
 import NewPopup from "./NewTodo"
 var jsonQuery = require('json-query')
@@ -201,7 +201,7 @@ render() {
                     } 
             
         
-            <Link to='/logout' onClick={this.props.handleLogout}>Log Out</Link> <br></br>
+            {/* <Link to='/logout' onClick={this.props.handleLogout}>Log Out</Link> <br></br> */}
         </div>
      );
      }
