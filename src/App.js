@@ -30,7 +30,7 @@ componentDidMount() {
   }
 
   reset = () => {
-    this.setState({loggedIn: localStorage.getItem("token")})
+    this.setState({loggedIn: true})
   }
 
 // to check login status
@@ -64,7 +64,7 @@ render() {
       <div>
         <BrowserRouter>
         <div>
-          <Nav      loggedIn={this.state.loggedIn} resetloggedIn={this.reset} handleLogout={this.handleLogout} />
+          <Nav      loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
         
           <Switch>
             <Route 

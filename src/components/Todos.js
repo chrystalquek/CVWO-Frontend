@@ -37,16 +37,14 @@ class Todos extends Component {
         const userid = localStorage.getItem("userid")
         axios.delete(`http://localhost:3001/api/users/${userid}/todos/${todoid}`, { headers: {"Authorization" : `Bearer ${token}`} })
       .then(response => {
-                    // axios.delete(`http://localhost:3001/api/users/${response.id}/todos/${todoid}`, {withCredentials: true})
-                    // .then(resp => {
-                        //console.log(resp.todos)
-                        // this.props.history.push(`/users/${this.props.id}/todos`)
-                        // const index = this.state.todos.findIndex(todo => todo.id === todoid);
-                        // console.log(index);
-                        // this.state.todos.splice(index, 1);
-                    this.refreshPage();
-                    })
-                }
+                    
+                const index = this.state.todos.findIndex(todo => todo.id === todoid);
+                console.log(index);
+                this.state.todos.splice(index, 1);
+                this.setState({ todos: this.state.todos });
+            //this.refreshPage();
+            })
+        }
             
             
     toggleEditPopup = (todoid) =>  () =>
@@ -70,43 +68,42 @@ class Todos extends Component {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-            // , body: JSON.stingify({
-            //     username,
-            //     password
-            // })
+            
         }).then(resp => resp.json())
         .then(response => {
             this.setState({ todos: response.todos });
         })
     }
 
-       
+    handleAdd = (todo) => {
+      let list = this.state.todos;
+      list.push(todo);
+      // Then we use that to set the state for list
+      this.setState({
+        todos: list
+      });
+      // Finally, we need to reset the form
+      
+    }
 
 
-        // if (token){    
-        //     fetch('http://localhost:3001/auto_login', {
-        //         headers: {
-        //         Authorization: `Bearer ${token}`
-        //         }
-        //     })
-        //     .then(resp => resp.json())
-        //     .then(response => {
-        //     if (response.errors){
-        //         this.props.history.push(`/login`);
-        //     } else {
-        //         fetch(`http://localhost:3001/api/users/${response.id}/todos`)
-        //             .then(respon => respon.json())
-        //             .then(respons => {
-                    
-        //             this.setState({ todos: respons.todos });
-        //             // will fix error catching later
-        //             }).catch(error => console.log(error))
-        //     }
-                
-        //     })
-        //     .catch(error => console.log('api errors:', error))
-        //     }}
-        
+    handleEdit = (todo) => {
+      
+      
+      // Then we use that to set the state for list
+      // Finally, we need to reset the form
+
+      const index = this.state.todos.findIndex(ToDo => ToDo.id === todo.id);
+      console.log(index);
+      //this.state.todos.splice(index, 1);
+      let list = this.state.todos
+      list[index] = todo;
+      this.setState({
+        todos: list
+      });
+      
+    }
+
 
 handleErrors = () => {
     return (
@@ -159,7 +156,7 @@ handleErrors = () => {
                     <EditPopup  
                             todoid={id[i]}
                             closePopup={this.toggleEditPopup.bind(this)} 
-                            refresh={this.refreshPage.bind(this)}
+                            refresh={this.handleEdit.bind(this)}
                     />  
                     : null  
                     }  </td>
@@ -195,7 +192,7 @@ render() {
                     {this.state.showNewPopup ?  
                     <NewPopup  
                     closePopup={this.toggleNewPopup.bind(this)} 
-                    refresh={this.refreshPage.bind(this)}
+                    refresh={this.handleAdd.bind(this)}
                     />    
                     : null  
                     } 

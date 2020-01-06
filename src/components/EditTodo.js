@@ -28,6 +28,7 @@ handleSubmit = (event) => {
     event.preventDefault()
     const {title, description, tag, category, duedate} = this.state
     let todo = {
+        id: this.props.todoid,
         title: title,
         description: description,
         tag: tag,
@@ -40,7 +41,7 @@ handleSubmit = (event) => {
 
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userid")
-    axios.put(`http://localhost:3001/api/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+    axios.put(`http://localhost:3001/api/users/${userid}/todos/${this.props.todoid}`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
               if (response.data.errors) {
@@ -51,8 +52,11 @@ handleSubmit = (event) => {
 
 
                 this.props.closePopup(0)();
+
+
+                this.props.refresh(todo);
                 
-                this.props.refresh();
+                
               }
                 
             })

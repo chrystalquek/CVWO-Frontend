@@ -38,18 +38,6 @@ handleSubmit = (event) => {
   }
 
 
-      // fetch(`http://localhost:3001/api/users/${userid}/todos`, {
-      //     method: 'POST',
-      //     headers: {
-      //       'Accept': 'application/json',
-      //       'Content-Type': 'application/json',
-      //       Authorization: `Bearer ${token}`
-      //     }
-      //     , 
-      //     body: JSON.stringify({todo})
-
-
-
       axios.post(`http://localhost:3001/api/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
       .then(response => {
         
@@ -57,11 +45,11 @@ handleSubmit = (event) => {
             
           this.setState({errors: response.data.errors});
 
-        } else 
-        
-        {
+        } else {
+       
+            todo.id = response.data.todoid;
               this.props.closePopup();     
-              this.props.refresh();
+              this.props.refresh(todo);
 
             // will fix error catching later
       }})
