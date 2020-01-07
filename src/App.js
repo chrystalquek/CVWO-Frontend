@@ -12,15 +12,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      loggedIn : localStorage.getItem("token")
+      loggedIn : localStorage.getItem("token"),
+      todos: {}
        
      };
      
   }
 componentDidMount() {
+    // this.refreshPage();
   }
     
-  
+//   refreshPage = () => {
+//     const token = localStorage.getItem("token")
+//     const userid = localStorage.getItem("userid")
+    
+//     if(token){
+//     fetch(`http://localhost:3001/api/users/${userid}/todos`, {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         }
+        
+//     }).then(resp => resp.json())
+//     .then(response => {
+//         this.setState({ todos: response.todos});
+//     })
+//   }
+// }
 
   handleLogout = () => {
     localStorage.removeItem("token")
