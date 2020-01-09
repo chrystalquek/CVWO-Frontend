@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import './EditTodo.css'
+import './Popup.css'
 
 
-class edit extends Component {
+class newtodo extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -46,8 +46,16 @@ handleSubmit = (event) => {
           this.setState({errors: response.data.errors});
 
         } else {
-       
-            todo.id = response.data.todoid;
+          let todo = {
+            id : response.data.todoid,
+            title: title,
+            description: description,
+            tag: tag,
+            category: category,
+            duedate: duedate
+        }
+            
+            console.log(todo);
               this.props.closePopup();     
               this.props.refresh(todo);
 
@@ -80,7 +88,7 @@ return (
         <form onSubmit={this.handleSubmit} >
           <input
             placeholder="title"
-            type="string"
+            type="text"
             name="title"
             value={title}
             onChange={this.handleChange}
@@ -94,14 +102,14 @@ return (
           />
           <input 
             placeholder="tag"
-            type="string"
+            type="text"
             name="tag"
             value={tag}
             onChange={this.handleChange}
           />
           <input
             placeholder="category"
-            type="string"
+            type="text"
             name="category"
             value={category}
             onChange={this.handleChange}
@@ -118,12 +126,12 @@ return (
             Create
           </button>
 
+          <button type="submit" onClick={this.props.closePopup}>close me</button>  
+
           
       
         </form> 
-        <div>
-            <button onClick={this.props.closePopup}>close me</button>  
-        </div>
+        
         <div>
           {
             this.state.errors ? this.handleErrors() : null
@@ -134,5 +142,5 @@ return (
     );
   }
 }
-export default withRouter(edit);
+export default withRouter(newtodo);
 

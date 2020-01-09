@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 // import {Link} from 'react-router-dom'
 import EditPopup from "./EditTodo"
 import NewPopup from "./NewTodo"
+import DeletePopup from "./DeleteTodo"
+import todoscss from "./ToDosStyle.css"
+import Logo from './image.jpg';
 var jsonQuery = require('json-query')
 
 
@@ -15,30 +18,18 @@ class Todos extends Component {
         filtered: {},
         query: '',
         showEditPopup: false,
-        showNewPopup: false
+        showNewPopup: false,
+        showDeletePopup: false
        };
        this.handleSearch = this.handleSearch.bind(this);
     }
 
 
-    // componentDidMount() {
-    //     // option to refresh page (make an extra API call) for every new/update/delete) or directly work with array
-    //     this.refreshPage()
-    // }
-
     componentDidMount() {
-      // this.setState({
-      //   todos: this.props.todos,
-      //   filtered: this.props.todos
-      // });
+      
       this.refreshPage();
     }
-    
-    // componentDidUpdate(nextProps) {
-    //   this.setState({
-    //     filtered: nextProps.todos
-    //   });
-    // }
+   
 
 
   handleChange = (event) => {
@@ -48,21 +39,7 @@ class Todos extends Component {
       })
     }
 
-    handleDelete = (todoid) =>  {
-        
-        const token = localStorage.getItem("token")
-        const userid = localStorage.getItem("userid")
-        axios.delete(`http://localhost:3001/api/users/${userid}/todos/${todoid}`, { headers: {"Authorization" : `Bearer ${token}`} })
-      .then(response => {
-                    
-                const index = this.state.filtered.findIndex(todo => todo.id === todoid);
-                this.state.filtered.splice(index, 1);
-                const index1 = this.state.todos.findIndex(todo => todo.id === todoid);
-                this.state.todos.splice(index1, 1);
-                this.setState({ filtered: this.state.filtered, todos: this.state.todos });
-            //this.refreshPage();
-            })
-        }
+    
             
             
     toggleEditPopup = (todoid) =>  () =>
@@ -75,6 +52,12 @@ class Todos extends Component {
     {
     this.setState({  
          showNewPopup: !this.state.showNewPopup 
+    })}
+
+    toggleDeletePopup =   (todoid) =>  () =>
+    {
+    this.setState({  
+         showDeletePopup: todoid 
     })}
 
     refreshPage = () => {
@@ -94,17 +77,27 @@ class Todos extends Component {
     }
 
     handleAdd = (todo) => {
+
       let list = this.state.todos;
+      // console.log(list);
+      
+      
       list.push(todo);
-      let list2 = this.state.filtered;
-      // Then we use that to set the state for list
-      if ( todo.tag.toLowerCase().includes(this.state.query) ) {
-        list2.push(todo);
-      }
+      // console.log(list);
+      // let list2 = this.state.filtered;
+      // // Then we use that to set the state for list
+      // // console.log(this.state.filtered);
+      // if ( todo.tag.toLowerCase().includes(this.state.query) ) {
+      //   list2.push(todo);
+      //   // console.log(this.state.filtered);
+      // }
       this.setState({
-        todos: list,
-        filtered: list2
+        todos: list
       });
+
+      this.handleSearch(this.state.query);
+      
+      
       // Finally, we need to reset the form
       
     }
@@ -123,16 +116,37 @@ class Todos extends Component {
 
 
       // still show in filtered list even if tag does not suit
-      let list2 = this.state.filtered;
+      // let list2 = this.state.filtered;
       // Then we use that to set the state for list
       
-      const index2 = this.state.filtered.findIndex(ToDo => ToDo.id === todo.id);
-      list2[index2] = todo;
+      // const index2 = this.state.filtered.findIndex(ToDo => ToDo.id === todo.id);
+      // list2[index2] = todo;
       
       this.setState({
-        todos: list,
-        filtered: list2
+        todos: list
       });
+
+      this.handleSearch(this.state.query);
+      
+    }
+
+    handleDelete = (todoid) => {
+
+      const index1 = this.state.todos.findIndex(ToDo => ToDo.id === todoid);
+
+     
+      this.state.todos.splice(index1, 1);
+
+      
+      // const index = this.state.filtered.findIndex(ToDo => ToDo.id === todoid);
+      // // console.log("in filtered")
+      // console.log(index);
+      // this.state.filtered.splice(index, 1);
+      
+      this.setState({ todos: this.state.todos });
+
+      this.handleSearch(this.state.query);
+      
       
     }
 
@@ -143,14 +157,18 @@ class Todos extends Component {
 
     handleSearch(e) {
       // Variable to hold the original version of the list
+      
       let currentList = [];
           // Variable to hold the filtered list before putting into state
       let newList = [];
 
+      let query = ((typeof e === 'string' || e instanceof String) ) ? e : e.target.value;
+
+
       
 
           // If the search bar isn't empty
-      if (e.target.value !== "") {
+      if (query !== "") {
               // Assign the original list to currentList
         currentList = this.state.todos;
 
@@ -160,7 +178,7 @@ class Todos extends Component {
                   // change current item to lowercase
           const lc = item.tag.toLowerCase();
                   // change search term to lowercase
-          const filter = e.target.value.toLowerCase();
+          const filter = query.toLowerCase();
                   // check to see if the current list item includes the search term
                   // If it does, it will be added to newList. Using lowercase eliminates
                   // issues with capitalization in search terms and search content
@@ -173,7 +191,7 @@ class Todos extends Component {
           // Set the filtered state based on what our rules added to newList
       this.setState({
         filtered: newList,
-        query: e.target.value.toLowerCase()
+        query: query.toLowerCase()
       });
 }
 
@@ -187,7 +205,7 @@ handleErrors = () => {
       <div>
         <ul>
         {this.state.errors.map(error => {
-        return <li key={error}>{error}</li>
+        return <span key={error}>{error}<br></br></span>
           })
         }
         </ul>
@@ -200,6 +218,7 @@ handleErrors = () => {
   
 
   renderTableData() {
+    
 
     let todos = Array.from(this.state.filtered)
 
@@ -224,8 +243,24 @@ handleErrors = () => {
              <td>{duedate[i]}</td>
              {/* <td><button onClick={this.handleDelete(id[i])}>Delete</button>  */}
 
-             <td><button onClick={() => { if (window.confirm('Are you sure you wish to delete this Todo?')) this.handleDelete(id[i]) }}>Delete</button> 
+             {/* <td><button onClick={() => { if (window.confirm('Are you sure you wish to delete this Todo?')) this.handleDelete(id[i]) }}>Delete</button> 
+              */}
+
              
+            <td>
+
+             <button onClick={this.toggleDeletePopup(id[i])}> Delete </button>  
+
+            {this.state.showDeletePopup === id[i]?  
+            <DeletePopup  
+                    todoid={id[i]}
+                    closePopup={this.toggleDeletePopup.bind(this)} 
+                    refresh={this.handleDelete.bind(this)}
+            />  
+            : null  
+            }
+
+
 
 
              {/* <div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } /> */}
@@ -251,6 +286,27 @@ handleErrors = () => {
        return <th key={index}>{key.toUpperCase()}</th>
     })
  }
+ renderTableOptions() {
+ return [<th key="search" colspan="6"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
+ <th key="new">
+   
+   <button onClick={this.toggleNewPopup}> New </button>  
+
+                    {this.state.showNewPopup ?  
+                    <NewPopup  
+                    closePopup={this.toggleNewPopup.bind(this)} 
+                    refresh={this.handleAdd.bind(this)}
+                    />    
+                    : null  
+                    } 
+   
+   
+   
+   
+   </th>] 
+  
+  
+}
 
 
 
@@ -258,11 +314,13 @@ handleErrors = () => {
 render() {
     
      return (
-       <div class = "todo">
+       <div >
+         <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
          <input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." />
            
            <table >
                <tbody>
+                 <tr> {this.renderTableOptions()}</tr>
                <tr>{this.renderTableHeader()}</tr>
                   {this.renderTableData()}
                </tbody>

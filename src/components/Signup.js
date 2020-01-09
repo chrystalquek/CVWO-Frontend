@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import style from './LoginSignup.css'
+import Logo from './image2.jpg';
 
 
 class Signup extends Component {
@@ -50,7 +52,7 @@ handleErrors = () => {
     return (
       <div>
         <ul>{this.state.errors.map((error) => {
-          return <li key={error}>{error}</li>
+          return <span key={error}>{error}<br></br></span>
         })}</ul> 
       </div>
     )
@@ -58,7 +60,9 @@ handleErrors = () => {
 render() {
     const {username, email, password, password_confirmation} = this.state
 return (
-      <div class= "outer">
+    <div >
+      <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
+      <div class="form-style-6">
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           <input
@@ -91,15 +95,21 @@ return (
           />
         
           <button placeholder="submit" type="submit">
-            Sign Up
+            Let's Sign Up!
           </button>
+
+          <div class = "errors" >
+          {this.state.errors ? this.handleErrors() : null}
+          </div>
+
+          
       
         </form>
-        <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
-        </div>
+        
+          
+        
+      </div>
+      
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import style from './LoginSignup.css'
+import Logo from './image2.jpg';
 
 
 
@@ -53,15 +55,15 @@ class Login extends Component {
         })
         .catch(error => console.log('api errors:', error))
       };
-
+      
 
 handleErrors = () => {
   
     return (
-      <div>
-        <ul>
+      <div >
+        <ul >
         {this.state.errors.map(error => {
-        return <li key={error}>{error}</li>
+        return <div key={error}>{error}<br></br></div>
           })
         }
         </ul>
@@ -71,10 +73,16 @@ handleErrors = () => {
 
 
 
+
+
+
 render() {
     const {username, password} = this.state
 return (
-      <div class="outer">
+  <div class = "container">
+        <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
+        <div class="form-style-6">
+
         <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>
           <input
@@ -99,12 +107,13 @@ return (
           </div>
           
           </form>
-          <div>
+          <div className = "errors">
           {
             this.state.errors ? this.handleErrors() : null
           }
         </div>
       </div>
+     </div>
     );
   }
 }

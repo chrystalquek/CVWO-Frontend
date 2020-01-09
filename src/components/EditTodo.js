@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import './EditTodo.css'
+import './Popup.css'
 
 
-class edit extends Component {
+class edittodo extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -89,7 +89,7 @@ return (
         <form onSubmit={this.handleSubmit} >
           <input
             placeholder="title"
-            type="string"
+            type="text"
             name="title"
             value={title}
             onChange={this.handleChange}
@@ -103,14 +103,14 @@ return (
           />
           <input 
             placeholder="tag"
-            type="string"
+            type="text"
             name="tag"
             value={tag}
             onChange={this.handleChange}
           />
           <input
             placeholder="category"
-            type="string"
+            type="text"
             name="category"
             value={category}
             onChange={this.handleChange}
@@ -128,11 +128,13 @@ return (
           </button>
 
           
+            <button type="submit" onClick={this.props.closePopup(0)}>close me</button>  
+          
+
+          
       
         </form> 
-        <div>
-            <button onClick={this.props.closePopup(0)}>close me</button>  
-        </div>
+        
         <div>
           {
             this.state.errors ? this.handleErrors() : null
@@ -143,6 +145,6 @@ return (
     );
   }
 }
-export default withRouter(edit);
+export default withRouter(edittodo);
 
 //this.props.closePopup
