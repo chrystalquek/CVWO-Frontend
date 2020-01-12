@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import style from './LoginSignup.css'
+import './LoginSignup.css'
 import Logo from './image2.jpg';
 
 

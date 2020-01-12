@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import EditPopup from "./EditTodo"
 import NewPopup from "./NewTodo"
 import DeletePopup from "./DeleteTodo"
-import todoscss from "./ToDosStyle.css"
+import "./ToDosStyle.css"
 import Logo from './image.jpg';
 var jsonQuery = require('json-query')
 
@@ -234,19 +234,13 @@ handleErrors = () => {
        
        return (
           <tr key={id[i]}>
-              {/* <td>{i + 1}</td> */}
+    
              <td>{id[i]}</td>
              <td>{title[i]}</td>
              <td>{description[i]}</td>
              <td>{tag[i]}</td>
              <td>{category[i]}</td>
              <td>{duedate[i]}</td>
-             {/* <td><button onClick={this.handleDelete(id[i])}>Delete</button>  */}
-
-             {/* <td><button onClick={() => { if (window.confirm('Are you sure you wish to delete this Todo?')) this.handleDelete(id[i]) }}>Delete</button> 
-              */}
-
-             
             <td>
 
              <button onClick={this.toggleDeletePopup(id[i])}> Delete </button>  
@@ -287,7 +281,7 @@ handleErrors = () => {
     })
  }
  renderTableOptions() {
- return [<th key="search" colspan="6"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
+ return [<th key="search" colSpan="6"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
  <th key="new">
    
    <button onClick={this.toggleNewPopup}> New </button>  
@@ -316,17 +310,17 @@ render() {
      return (
        <div >
          <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
-         <input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." />
+         {/* <input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /> */}
            
            <table >
                <tbody>
-                 <tr> {this.renderTableOptions()}</tr>
+                 <tr>{this.renderTableOptions()}</tr>
                <tr>{this.renderTableHeader()}</tr>
                   {this.renderTableData()}
                </tbody>
             </table>
 
-            <button onClick={this.toggleNewPopup}> New </button>  
+            {/* <button onClick={this.toggleNewPopup}> New </button>  
 
                     {this.state.showNewPopup ?  
                     <NewPopup  
@@ -334,7 +328,7 @@ render() {
                     refresh={this.handleAdd.bind(this)}
                     />    
                     : null  
-                    } 
+                    }  */}
             
         
             {/* <Link to='/logout' onClick={this.props.handleLogout}>Log Out</Link> <br></br> */}

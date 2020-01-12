@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import style from './LoginSignup.css'
+import './LoginSignup.css'
 import Logo from './image2.jpg';
 
 
@@ -79,9 +79,9 @@ handleErrors = () => {
 render() {
     const {username, password} = this.state
 return (
-  <div class = "container">
+  <div className = "container">
         <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
-        <div class="form-style-6">
+        <div className="form-style-6">
 
         <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>

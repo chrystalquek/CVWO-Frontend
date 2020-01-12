@@ -3,7 +3,7 @@ import React from 'react';
 //import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Logo from './image.jpg';
-import Nav from './Nav.css'
+import './Nav.css'
 
 
 const Home = (props) => {
@@ -11,7 +11,7 @@ const Home = (props) => {
       
         
    
-            <div class ="home">
+            <div className ="home">
               <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
             
           
