@@ -59,7 +59,7 @@ handleSubmit = (event) => {
 
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userid")
-    axios.put(`http://localhost:3001/api/users/${userid}/todos/${this.props.todoid}`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+    axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
               if (response.data.errors) {

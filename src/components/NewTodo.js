@@ -59,7 +59,7 @@ handleSubmit = (event) => {
   console.log(duedate);
 
 
-      axios.post(`http://localhost:3001/api/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+      axios.post(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
       .then(response => {
         
         if (response.data.errors) {

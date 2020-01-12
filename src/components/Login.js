@@ -42,7 +42,7 @@ class Login extends Component {
         }
         // console.log(user);
         
-        axios.post('http://localhost:3001/login', {user})
+        axios.post(process.env.REACT_APP_API_ENDPOINT + '/login', {user})
         .then(data => {
           if (data.data.failure){
             this.setState({errors: ["Username / Password Invalid"]})
