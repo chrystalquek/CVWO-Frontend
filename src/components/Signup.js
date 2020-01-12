@@ -32,7 +32,7 @@ handleSubmit = (event) => {
       password: password,
       password_confirmation: password_confirmation
     }
-    axios.post(process.env.REACT_APP_API_ENDPOINT + '/users', {user}, {withCredentials: true})
+    axios.post(process.env.REACT_APP_API_ENDPOINT + '/users', {user})
         .then(response => {
           if (response.data.errors) {
             
