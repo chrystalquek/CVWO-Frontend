@@ -49,12 +49,11 @@
     margin-top : -16px;
   }
   .popup_inner input[type="text"],
-  .popup_inner input[type="date"],
-  .popup_inner input[type="datetime"],
+   
   .popup_inner input[type="email"],
   .popup_inner input[type="number"],
   .popup_inner input[type="search"],
-  .popup_inner input[type="time"],
+
   .popup_inner input[type="url"],
   .popup_inner input[type="password"],
   .popup_inner textarea,
@@ -76,9 +75,23 @@
     
     font: 95% Arial, Helvetica, sans-serif;
   }
+
+  
+
+  .datepicker {
+    text-align:center;
+
+    width: 500px;
+    margin-left: -12%;
+    padding: -12%;
+    height: 50px;
+  }
+
+
+
+
+
   .popup_inner input[type="text"]:focus,
-  .popup_inner input[type="date"]:focus,
-  .popup_inner input[type="datetime"]:focus,
   .popup_inner input[type="email"]:focus,
   .popup_inner input[type="number"]:focus,
   .popup_inner input[type="search"]:focus,
@@ -100,7 +113,7 @@
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    width: 50%;
+    width: 80%;
     padding: 3%;
     margin-top: 3%;
     margin-left: 1%;

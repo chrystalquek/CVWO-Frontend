@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import './Popup.css'
-
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
 class newtodo extends Component {
   constructor(props) {
@@ -13,9 +14,11 @@ class newtodo extends Component {
       description: '',
       tag: '',
       category: '',
-      duedate: '',
-      errors: []
+      duedate: new Date(),
+      errors: [],
+      
      };
+     this.handleTagChange = this.handleTagChange.bind(this);
   }
 handleChange = (event) => {
     const {name, value} = event.target
@@ -27,6 +30,23 @@ handleSubmit = (event) => {
   
   event.preventDefault()
   const {title, description, tag, category, duedate} = this.state
+  // console.log(duedate.getUTCFullYear().toString())
+  // console.log(duedate.getUTCMonth() + 1)
+  // console.log(duedate.getUTCDate())
+  // console.log(duedate.getUTCHours())
+  // console.log(duedate.getUTCMinutes())
+  // 2019-03-22T23:59:59.000Z
+  // console.log(duedate.getUTCMonth())
+  
+  const month = duedate.getUTCMonth() >= 9 ? (duedate.getUTCMonth()  + 1).toString() : "0" + (duedate.getUTCMonth()  + 1).toString();
+  const day = duedate.getUTCDate() > 9 ? duedate.getUTCDate().toString() : "0" + (duedate.getUTCDate()).toString();
+  const hour = duedate.getUTCHours() > 9 ? duedate.getUTCHours().toString() : "0" + (duedate.getUTCHours()).toString();
+  const min = duedate.getUTCMinutes() > 9 ? duedate.getUTCMinutes().toString() : "0" + (duedate.getUTCMinutes()).toString();
+
+  const date = duedate.getUTCFullYear().toString() + "-" + month + "-" + day
+      + "T" + hour + ":" + min + ":00.000Z"
+
+  console.log(date)
   const token = localStorage.getItem("token")
   const userid = localStorage.getItem("userid")
   let todo = {
@@ -34,8 +54,9 @@ handleSubmit = (event) => {
       description: description,
       tag: tag,
       category: category,
-      duedate: duedate
+      duedate: date
   }
+  console.log(duedate);
 
 
       axios.post(`http://localhost:3001/api/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
@@ -52,7 +73,7 @@ handleSubmit = (event) => {
             description: description,
             tag: tag,
             category: category,
-            duedate: duedate
+            duedate: date
         }
             
             console.log(todo);
@@ -61,6 +82,13 @@ handleSubmit = (event) => {
 
             // will fix error catching later
       }})
+}
+
+onChange = date => this.setState({duedate: date});;
+
+handleTagChange(event) {
+  
+  this.setState({tag: event.target.value});
 }
 
 
@@ -72,7 +100,7 @@ handleErrors = () => {
     return (
       <div>
         <ul>{this.state.errors.map((error) => {
-          return <li key={error}>{error}</li>
+          return <span key={error}>{error}<br></br></span>
         })}</ul> 
       </div>
     )
@@ -100,13 +128,23 @@ return (
             value={description}
             onChange={this.handleChange}
           />
-          <input 
+          {/* <input 
             placeholder="tag"
             type="text"
             name="tag"
             value={tag}
             onChange={this.handleChange}
-          />
+          /> */}
+          <label>
+          
+          <select value={this.state.tag} onChange={this.handleTagChange}>
+            <option value="Urgent">Urgent</option>
+            <option value="Normal">Normal</option>
+            <option value="Low">Low</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </label>
+
           <input
             placeholder="category"
             type="text"
@@ -114,29 +152,50 @@ return (
             value={category}
             onChange={this.handleChange}
           />
-          <input
+          {/* <input
             placeholder="duedate"
             type="datetime"
             name="duedate"
             value={duedate}
             onChange={this.handleChange}
-          />
+          /> */}
+          <DatePicker
+                  selected={this.state.duedate}
+                  onChange={this.onChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  timeCaption="time"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />
+
+          
         
           <button placeholder="submit" type="submit">
             Create
           </button>
 
+          
+
           <button type="submit" onClick={this.props.closePopup}>close me</button>  
 
+          <div class = "errors" >
+          {this.state.errors ? this.handleErrors() : null}
+          </div>
           
       
         </form> 
+
         
-        <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
-        </div>
+        
+        
+             
+                
+            
+            
+       
+        
+        
         </div>
       </div>
     );

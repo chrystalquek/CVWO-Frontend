@@ -6,6 +6,7 @@ import NewPopup from "./NewTodo"
 import DeletePopup from "./DeleteTodo"
 import "./ToDosStyle.css"
 import Logo from './image.jpg';
+
 var jsonQuery = require('json-query')
 
 
@@ -19,7 +20,8 @@ class Todos extends Component {
         query: '',
         showEditPopup: false,
         showNewPopup: false,
-        showDeletePopup: false
+        showDeletePopup: false,
+        sortorder: true
        };
        this.handleSearch = this.handleSearch.bind(this);
     }
@@ -65,7 +67,7 @@ class Todos extends Component {
         const userid = localStorage.getItem("userid")
         
 
-        fetch(`http://localhost:3001/api/users/${userid}/todos`, {
+        fetch(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -195,6 +197,88 @@ class Todos extends Component {
       });
 }
 
+sortby = (factor) => () => {
+  
+  
+  let newList = this.state.filtered;
+  if (factor == "duedate") {
+        //string.substr(start, length)
+
+        //2019-03-22 23:59:59
+
+        if (this.state.sortorder) {
+
+        newList = newList.sort(function (a, b) {
+          
+          let c = new Date(b.duedate);
+          let d = new Date(a.duedate);
+         
+          
+
+          if (c > d) {
+            return -1;
+            }
+          if (d > c) {
+            return 1;
+          }
+          return 0;
+        });} else {
+          newList = newList.sort(function (a, b) {
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            let c = new Date(b.duedate);
+            let d = new Date(a.duedate);
+           
+            
+  
+            if (c > d) {
+              return 1;
+              }
+            if (d > c) {
+              return -1;
+            }
+            return 0;
+
+        })}
+        
+
+  
+
+  } else {
+      if (this.state.sortorder) {
+      
+        newList = newList.sort(function (a, b) {
+          if (a[factor] > b[factor]) {
+              return -1;
+          }
+          if (b[factor] > a[factor]) {
+              return 1;
+          }
+          return 0;
+      } );
+        
+      } else {
+        newList = newList.sort(function (a, b) {
+          if (a[factor] > b[factor]) {
+              return 1;
+          }
+          if (b[factor] > a[factor]) {
+              return -1;
+          }
+          return 0;
+      }  );
+      }
+  }
+  
+  
+
+  this.setState({
+    filtered: newList,
+    sortorder: !this.state.sortorder
+    
+  })
+}
+
 
 
 
@@ -277,7 +361,13 @@ handleErrors = () => {
  renderTableHeader() {
     let header = ["id", "title", "description", "tag", "category", "duedate", "options"]
     return header.map((key, index) => {
-       return <th key={index}>{key.toUpperCase()}</th>
+
+      if (key !== "id" && key !== "options") {
+        return <th key={index}>{key.toUpperCase()} <button onClick={this.sortby(key)}> Sort </button>  </th>
+
+      } else {
+       return <th key={index}>{key.toUpperCase()}  </th>
+      }
     })
  }
  renderTableOptions() {
@@ -320,18 +410,7 @@ render() {
                </tbody>
             </table>
 
-            {/* <button onClick={this.toggleNewPopup}> New </button>  
-
-                    {this.state.showNewPopup ?  
-                    <NewPopup  
-                    closePopup={this.toggleNewPopup.bind(this)} 
-                    refresh={this.handleAdd.bind(this)}
-                    />    
-                    : null  
-                    }  */}
             
-        
-            {/* <Link to='/logout' onClick={this.props.handleLogout}>Log Out</Link> <br></br> */}
         </div>
      );
      }
