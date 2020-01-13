@@ -33,7 +33,7 @@ handleSubmit = (event) => {
       password_confirmation: password_confirmation
     }
     
-    //process.env.REACT_APP_API_ENDPOINT 
+    // process.env.REACT_APP_API_ENDPOINT 
     axios.post('https://to-do-helper-api.herokuapp.com/api' + '/users', {user})
         .then(response => {
           if (response.data.errors) {
