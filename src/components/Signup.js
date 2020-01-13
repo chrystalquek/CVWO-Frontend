@@ -34,7 +34,7 @@ handleSubmit = (event) => {
     }
     
     //process.env.REACT_APP_API_ENDPOINT 
-    axios.post('https://to-do-helper-api/api' + '/users', {user})
+    axios.post('https://to-do-helper-api.herokuapp.com/api' + '/users', {user})
         .then(response => {
           if (response.data.errors) {
             
