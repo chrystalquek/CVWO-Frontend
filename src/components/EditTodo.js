@@ -27,11 +27,11 @@ class edittodo extends Component {
     const userid = localStorage.getItem("userid")
     axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
-              console.log(response);
 
               const todo = response.data.todo;
 
-              console.log(todo)
+              let date = new Date(todo.duedate.substr(0,19));
+              console.log(date);
 
               
 
@@ -39,7 +39,8 @@ class edittodo extends Component {
                 title: todo.title,
                 description: todo.description,
                 tag: todo.tag,
-                category: todo.category
+                category: todo.category,
+                duedate: date
               })
 
 
