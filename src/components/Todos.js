@@ -383,7 +383,7 @@ handleErrors = () => {
  <th key="new">
    
    <button onClick={this.toggleNewPopup}>
-   <FontAwesomeIcon icon={faPlus} /> {' '}Add New ToDo </button> 
+   <FontAwesomeIcon icon={faPlus} /> {' '}Add New </button> 
 
                     {this.state.showNewPopup ?  
                     <NewPopup  
