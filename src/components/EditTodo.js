@@ -28,7 +28,7 @@ class edittodo extends Component {
     axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
-              const todo = response.data.todo;
+              const todo = response.todo;
 
               console.log(todo)
 
