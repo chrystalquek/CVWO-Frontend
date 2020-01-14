@@ -84,6 +84,11 @@ handleTagChange(event) {
   this.setState({tag: event.target.value});
 }
 
+handleDateChange(date) {
+  
+  this.setState({duedate: date});
+}
+
 
 
 
@@ -154,7 +159,7 @@ return (
           /> */}
           <DatePicker
                   selected={this.state.duedate}
-                  onChange={this.onChange}
+                  onChange={this.handleDateChange}
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={1}

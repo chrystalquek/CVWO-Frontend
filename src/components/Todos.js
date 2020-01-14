@@ -320,7 +320,7 @@ handleErrors = () => {
        
        return (
           <tr key={id[i]}>
-            <td>{i+1}</td>
+            
              <td>{id[i]}</td>
              <td>{title[i]}</td>
              <td>{description[i]}</td>
@@ -367,10 +367,10 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["fakeid", "id", "title", "description", "tag", "category", "duedate", "options"]
+    let header = ["id", "title", "description", "tag", "category", "duedate", "options"]
     return header.map((key, index) => {
 
-      if (key !== "id" && key !== "options" && key !== "fakeid") {
+      if (key !== "options" ) {
         return <th key={index}>{key.toUpperCase()} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
