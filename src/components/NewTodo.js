@@ -163,7 +163,7 @@ return (
                   onChange={this.handleDateChange}
                   showTimeSelect
                   timeFormat="HH:mm"
-                  timeIntervals={1}
+                  timeIntervals={60}
                   timeCaption="time"
                   dateFormat="MMMM d, yyyy h:mm aa"
                 />

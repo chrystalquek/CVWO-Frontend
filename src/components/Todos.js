@@ -379,7 +379,7 @@ handleErrors = () => {
     })
  }
  renderTableOptions() {
- return [<th key="search" colSpan="7"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
+ return [<th key="search" colSpan="5"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
  <th key="new">
    
    <button onClick={this.toggleNewPopup}>

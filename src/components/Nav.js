@@ -38,6 +38,14 @@ import './Nav.css'
                         <li className="goleft">
                         <Link  to="/todos">Todos</Link>
                         </li>
+                        {
+                          (localStorage.getItem("admin"))
+                          ?
+                          <li className="goleft">
+                          <Link  to="/users">Users</Link>
+                          </li>
+                          : null
+                        }
                         <li className="goright">
                         <Link  to="/logout" onClick={this.props.handleLogout} >Logout</Link>
                         </li>
