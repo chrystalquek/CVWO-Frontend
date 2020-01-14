@@ -6,6 +6,8 @@ import NewPopup from "./NewTodo"
 import DeletePopup from "./DeleteTodo"
 import "./ToDosStyle.css"
 import Logo from './image.jpg';
+import { faEdit, faTrashAlt, faSort, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 var jsonQuery = require('json-query')
 
@@ -318,16 +320,18 @@ handleErrors = () => {
        
        return (
           <tr key={id[i]}>
-    
+            <td>{i+1}</td>
              <td>{id[i]}</td>
              <td>{title[i]}</td>
              <td>{description[i]}</td>
              <td>{tag[i]}</td>
              <td>{category[i]}</td>
-             <td>{duedate[i]}</td>
+             <td>{duedate[i].substr(0,10) + "  " + duedate[i].substr(11,8)}</td>
             <td>
 
-             <button onClick={this.toggleDeletePopup(id[i])}> Delete </button>  
+             <button onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
+             
+            
 
             {this.state.showDeletePopup === id[i]?  
             <DeletePopup  
@@ -335,6 +339,7 @@ handleErrors = () => {
                     closePopup={this.toggleDeletePopup.bind(this)} 
                     refresh={this.handleDelete.bind(this)}
             />  
+            
             : null  
             }
 
@@ -343,7 +348,10 @@ handleErrors = () => {
 
              {/* <div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } /> */}
 
-             <button onClick={this.toggleEditPopup(id[i])}> Update </button>  
+             <button onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
+             
+
+         
 
                     {this.state.showEditPopup === id[i]?  
                     <EditPopup  
@@ -359,11 +367,11 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["id", "title", "description", "tag", "category", "duedate", "options"]
+    let header = ["fakeid", "id", "title", "description", "tag", "category", "duedate", "options"]
     return header.map((key, index) => {
 
-      if (key !== "id" && key !== "options") {
-        return <th key={index}>{key.toUpperCase()} <button onClick={this.sortby(key)}> Sort </button>  </th>
+      if (key !== "id" && key !== "options" && key !== "fakeid") {
+        return <th key={index}>{key.toUpperCase()} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
        return <th key={index}>{key.toUpperCase()}  </th>
@@ -371,10 +379,11 @@ handleErrors = () => {
     })
  }
  renderTableOptions() {
- return [<th key="search" colSpan="6"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
+ return [<th key="search" colSpan="7"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
  <th key="new">
    
-   <button onClick={this.toggleNewPopup}> New </button>  
+   <button onClick={this.toggleNewPopup}>
+   <FontAwesomeIcon icon={faPlus} /> {' '}Add New ToDo </button> 
 
                     {this.state.showNewPopup ?  
                     <NewPopup  

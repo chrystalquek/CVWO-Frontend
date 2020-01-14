@@ -12,7 +12,7 @@ class newtodo extends Component {
     this.state = { 
       title: '',
       description: '',
-      tag: '',
+      tag: 'Urgent',
       category: '',
       duedate: new Date(),
       errors: [],

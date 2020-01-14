@@ -41,6 +41,8 @@ class Login extends Component {
           password: password
         }
         // console.log(user);
+
+        console.log(process.env.REACT_APP_API_ENDPOINT + '/login')
         
         axios.post(process.env.REACT_APP_API_ENDPOINT + '/login', {user})
         .then(data => {
