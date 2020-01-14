@@ -241,6 +241,7 @@ handleErrors = () => {
 
     let users = Array.from(this.state.filtered)
 
+    var id = jsonQuery('[*][id]', { data: this.state.filtered }).value
     var username = jsonQuery('[*][username]', { data: this.state.filtered }).value
     var email = jsonQuery('[*][email]', { data: this.state.filtered }).value
     var admin = jsonQuery('[*][admin]', { data: this.state.filtered }).value
