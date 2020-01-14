@@ -29,7 +29,7 @@ class edittodo extends Component {
             .then(response => {
               console.log(response);
 
-              const todo = response.todo;
+              const todo = response.data.todo;
 
               console.log(todo)
 
