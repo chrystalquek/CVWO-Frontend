@@ -19,6 +19,7 @@ class newtodo extends Component {
       
      };
      this.handleTagChange = this.handleTagChange.bind(this);
+     this.handleDateChange = this.handleDateChange.bind(this);
   }
 handleChange = (event) => {
     const {name, value} = event.target
@@ -77,7 +78,7 @@ handleSubmit = (event) => {
       }})
 }
 
-onChange = date => this.setState({duedate: date});;
+
 
 handleTagChange(event) {
   

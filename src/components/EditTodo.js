@@ -19,6 +19,7 @@ class edittodo extends Component {
       errors: []
      };
      this.handleTagChange = this.handleTagChange.bind(this);
+     this.handleDateChange = this.handleDateChange.bind(this);
   }
 
 
