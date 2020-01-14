@@ -24,6 +24,7 @@ class Users extends Component {
         sortorder: true
        };
        this.handleSearch = this.handleSearch.bind(this);
+       this.handleAdminChange = this.handleAdminChange.bind(this);
     }
 
 
@@ -122,6 +123,12 @@ class Users extends Component {
       
       
     }
+
+    handleAdminChange(event) {
+  
+        this.setState({tag: event.target.value});
+      }
+      
 
 
 

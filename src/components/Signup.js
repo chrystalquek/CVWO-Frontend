@@ -11,7 +11,7 @@ class Signup extends Component {
     this.state = { 
       username: '',
       email: '',
-      // admin: false,
+      admin: false,
       password: '',
       password_confirmation: '',
       errors: []
@@ -26,14 +26,14 @@ handleChange = (event) => {
 handleSubmit = (event) => {
   
     event.preventDefault()
-    // const {username, email, password, password_confirmation, admin} = this.state
-    const {username, email, password, password_confirmation} = this.state
+    const {username, email, password, password_confirmation, admin} = this.state
+    // const {username, email, password, password_confirmation} = this.state
     let user = {
       username: username,
       email: email,
       password: password,
-      password_confirmation: password_confirmation
-      // admin: admin
+      password_confirmation: password_confirmation,
+      admin: admin
     }
     
     
@@ -106,13 +106,13 @@ return (
             onChange={this.handleChange}
           />
 
-          {/* <label>
+          <label>
           
           <select value={this.state.admin} onChange={this.handleAdminChange}>
             <option value="true">Admin</option>
             <option value="false">User</option>
           </select>
-        </label> */}
+        </label>
         
           <button placeholder="submit" type="submit">
             Let's Sign Up!
