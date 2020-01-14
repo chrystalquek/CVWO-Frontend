@@ -30,13 +30,6 @@ handleSubmit = (event) => {
   
   event.preventDefault()
   const {title, description, tag, category, duedate} = this.state
-  // console.log(duedate.getUTCFullYear().toString())
-  // console.log(duedate.getUTCMonth() + 1)
-  // console.log(duedate.getUTCDate())
-  // console.log(duedate.getUTCHours())
-  // console.log(duedate.getUTCMinutes())
-  // 2019-03-22T23:59:59.000Z
-  // console.log(duedate.getUTCMonth())
   
   const month = duedate.getUTCMonth() >= 9 ? (duedate.getUTCMonth()  + 1).toString() : "0" + (duedate.getUTCMonth()  + 1).toString();
   const day = duedate.getUTCDate() > 9 ? duedate.getUTCDate().toString() : "0" + (duedate.getUTCDate()).toString();
@@ -164,7 +157,7 @@ return (
                   onChange={this.onChange}
                   showTimeSelect
                   timeFormat="HH:mm"
-                  timeIntervals={15}
+                  timeIntervals={1}
                   timeCaption="time"
                   dateFormat="MMMM d, yyyy h:mm aa"
                 />

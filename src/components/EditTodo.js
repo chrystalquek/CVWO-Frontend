@@ -20,6 +20,34 @@ class edittodo extends Component {
      };
      this.handleTagChange = this.handleTagChange.bind(this);
   }
+
+
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    const userid = localStorage.getItem("userid")
+    axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
+            .then(response => {
+
+              const todo = response.data.todo;
+
+              console.log(todo)
+
+              this.setState({
+                title: todo.title,
+                description: todo.description,
+                tag: todo.tag,
+                category: todo.category,
+                duedate: todo.duedate
+              })
+
+
+                
+            })
+
+      
+  }
+
+
 handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
@@ -110,14 +138,14 @@ return (
             placeholder="title"
             type="text"
             name="title"
-            value={title}
+            value={this.state.title}
             onChange={this.handleChange}
           />
           <input
             placeholder="description"
             type="text"
             name="description"
-            value={description}
+            value={this.state.description}
             onChange={this.handleChange}
           />
           <label>
@@ -133,7 +161,7 @@ return (
             placeholder="category"
             type="text"
             name="category"
-            value={category}
+            value={this.state.category}
             onChange={this.handleChange}
           />
           <DatePicker
@@ -141,7 +169,7 @@ return (
                   onChange={this.onChange}
                   showTimeSelect
                   timeFormat="HH:mm"
-                  timeIntervals={15}
+                  timeIntervals={1}
                   timeCaption="time"
                   dateFormat="MMMM d, yyyy h:mm aa"
                 />
