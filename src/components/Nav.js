@@ -6,6 +6,7 @@ import './Nav.css'
 
 
     render() {    
+     
       return (
         <nav >
           <div className="navbar">
@@ -39,7 +40,7 @@ import './Nav.css'
                         <Link  to="/todos">Todos</Link>
                         </li>
                         {
-                          (localStorage.getItem("admin"))
+                          (this.props.isAdmin === true)
                           ?
                           <li className="goleft">
                           <Link  to="/users">Users</Link>

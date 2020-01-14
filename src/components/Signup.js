@@ -11,7 +11,7 @@ class Signup extends Component {
     this.state = { 
       username: '',
       email: '',
-      admin: false,
+      admin: "false",
       password: '',
       password_confirmation: '',
       errors: []
@@ -36,6 +36,7 @@ handleSubmit = (event) => {
       password_confirmation: password_confirmation,
       admin: admin
     }
+    console.log(user);
     
     
     axios.post(process.env.REACT_APP_API_ENDPOINT  + '/users', {user})

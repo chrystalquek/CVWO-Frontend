@@ -49,9 +49,11 @@ class Login extends Component {
             this.setState({errors: ["Username / Password Invalid"]})
 
           } else {
-            localStorage.setItem("token", data.data.jwt)
-            localStorage.setItem("userid", data.data.userid)
-            localStorage.setItem("isAdmin", data.data.admin)
+            localStorage.setItem("token", data.data.jwt);
+            localStorage.setItem("userid", data.data.userid);
+           
+            localStorage.setItem("isAdmin", data.data.admin);
+        
             this.handleLogin()
           }
         })

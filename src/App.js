@@ -13,7 +13,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      loggedIn : localStorage.getItem("token")
+      loggedIn : localStorage.getItem("token"),
+      admin: localStorage.getItem("isAdmin")
        
      };
      
@@ -42,6 +43,7 @@ componentDidMount() {
   handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("userid")
+    localStorage.removeItem("isAdmin")
     this.setState({loggedIn: false})
     
   }
@@ -81,7 +83,7 @@ render() {
       <div>
         <BrowserRouter>
         <div>
-          <Nav      loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
+          <Nav      loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} isAdmin = {this.state.isAdmin}/>
         
           <Switch>
             <Route 
