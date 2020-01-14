@@ -47,7 +47,7 @@ handleSubmit = (event) => {
 
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userid")
-    axios.delete(`http://localhost:3001/api/users/${userid}/todos/${this.props.todoid}`, { headers: {"Authorization" : `Bearer ${token}`} })
+    axios.delete(process.env.REACT_APP_API_ENDPOINT + `/${userid}/todos/${this.props.todoid}`, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
 
