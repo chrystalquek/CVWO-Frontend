@@ -16,6 +16,7 @@ class Signup extends Component {
       password_confirmation: '',
       errors: []
      };
+     this.handleAdminChange = this.handleAdminChange.bind(this);
   }
 handleChange = (event) => {
     const {name, value} = event.target
