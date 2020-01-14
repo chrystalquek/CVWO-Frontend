@@ -33,12 +33,13 @@ class edittodo extends Component {
 
               console.log(todo)
 
+              
+
               this.setState({
                 title: todo.title,
                 description: todo.description,
                 tag: todo.tag,
-                category: todo.category,
-                duedate: todo.duedate
+                category: todo.category
               })
 
 
@@ -59,6 +60,11 @@ handleChange = (event) => {
   handleTagChange(event) {
   
     this.setState({tag: event.target.value});
+  }
+
+  handleDateChange(date) {
+  
+    this.setState({duedate: date});
   }
 
 handleSubmit = (event) => {
@@ -167,7 +173,7 @@ return (
           />
           <DatePicker
                   selected={this.state.duedate}
-                  onChange={this.onChange}
+                  onChange={this.handleDateChange}
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={1}
