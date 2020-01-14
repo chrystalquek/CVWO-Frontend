@@ -27,6 +27,7 @@ class edittodo extends Component {
     const userid = localStorage.getItem("userid")
     axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
+              console.log(response);
 
               const todo = response.todo;
 
