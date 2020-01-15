@@ -6,7 +6,7 @@ import './Nav.css'
 
 
     render() {    
-      console.log(this.props.isAdmin);
+      
      
       return (
         <nav >
@@ -41,7 +41,7 @@ import './Nav.css'
                         <Link  to="/todos">Todos</Link>
                         </li>
                         {
-                          (this.props.isAdmin === true)
+                          (this.props.isAdmin)
                           ?
                           <li className="goleft">
                           <Link  to="/users">Users</Link>
