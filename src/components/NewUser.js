@@ -40,12 +40,20 @@ handleSubmit = (event) => {
     
     
     axios.post(process.env.REACT_APP_API_ENDPOINT  + '/users', {user})
-        .then(response => {
+        .then(response => { 
+
+            if (response.data.errors) {
+                console.log(response.data.errors)
+            
+                this.setState({errors: response.data.errors});
+      
+              } else {
           
         
 
             this.props.closePopup();     
               this.props.refresh(user);
+              }
           
         })
         
