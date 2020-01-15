@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import EditPopup from "./EditTodo"
-import NewPopup from "./NewTodo"
-import DeletePopup from "./DeleteTodo"
+import EditPopup from "./EditUser"
+import NewPopup from "./NewUser"
+import DeletePopup from "./DeleteUser"
 import "./ToDosStyle.css"
 import Logo from './image2.jpg';
 import { faEdit, faTrashAlt, faSort, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +15,7 @@ class Users extends Component {
     constructor(props) {
       super(props);
       this.state = { 
-        userss: {},
+        users: {},
         filtered: {},
         query: '',
         showEditPopup: false,
@@ -255,7 +255,7 @@ handleErrors = () => {
              <td>{id[i]}</td>
              <td>{username[i]}</td>
              <td>{email[i]}</td>
-             <td>{admin[i]}</td>
+             <td>{admin[i].toString()}</td>
 
             <td>
 
