@@ -51,9 +51,9 @@ class Login extends Component {
           } else {
             localStorage.setItem("token", data.data.jwt);
             localStorage.setItem("userid", data.data.userid);
-           
+           if (data.data.admin){
             localStorage.setItem("isAdmin", data.data.admin);
-        
+           }
             this.handleLogin()
           }
         })
