@@ -14,7 +14,7 @@ class App extends Component {
     super(props);
     this.state = { 
       loggedIn : localStorage.getItem("token"),
-      admin: localStorage.getItem("isAdmin")
+      isAdmin: localStorage.getItem("isAdmin")
        
      };
      

@@ -6,6 +6,7 @@ import './Nav.css'
 
 
     render() {    
+      console.log(this.props.isAdmin);
      
       return (
         <nav >
