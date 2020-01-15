@@ -43,7 +43,7 @@ import './Nav.css'
                         <Link  to="/todos">Todos</Link>
                         </li>
                         {
-                          (localStorage.removeItem("isAdmin"))
+                          (localStorage.getItem("isAdmin"))
                           ?
                           <li className="goleft">
                           <Link  to="/users">Users</Link>
