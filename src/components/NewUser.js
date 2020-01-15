@@ -45,7 +45,7 @@ handleSubmit = (event) => {
         
 
             this.props.closePopup();     
-              this.props.refresh(todo);
+              this.props.refresh(user);
           
         })
         
