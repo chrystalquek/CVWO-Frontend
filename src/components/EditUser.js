@@ -23,7 +23,7 @@ class edituser extends Component {
   componentDidMount() {
     const token = localStorage.getItem("token")
     
-    axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
+    axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${this.props.userid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
               const user = response.data.user;
@@ -72,7 +72,7 @@ handleSubmit = (event) => {
 
     const token = localStorage.getItem("token")
     
-    axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${this.props.userid}`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+    axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${this.props.userid}`, {user}, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
               if (response.data.errors) {

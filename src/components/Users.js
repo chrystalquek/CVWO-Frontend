@@ -126,7 +126,7 @@ class Users extends Component {
 
     handleAdminChange(event) {
   
-        this.setState({tag: event.target.value});
+        this.setState({admin: event.target.value});
       }
       
 
