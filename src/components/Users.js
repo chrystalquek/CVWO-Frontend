@@ -156,7 +156,8 @@ class Users extends Component {
               // based on the search terms
         newList = currentList.filter(item => {
                   // change current item to lowercase
-          const lc = item.tag.toLowerCase();
+          const lc = item.username.toLowerCase();
+
                   // change search term to lowercase
           const filter = query.toLowerCase();
                   // check to see if the current list item includes the search term
@@ -252,12 +253,13 @@ handleErrors = () => {
        return (
           <tr key={id[i]}>
             
-             <td>{id[i]}</td>
              <td>{username[i]}</td>
              <td>{email[i]}</td>
              <td>{admin[i].toString()}</td>
 
             <td>
+              {id[i] === localStorage.getItem("userid") ? null :
+              <span>
 
              <button onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
              
@@ -272,6 +274,8 @@ handleErrors = () => {
             
             : null  
             }
+            </span>
+          }
 
 
              <button onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
@@ -293,7 +297,7 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["id", "username", "email", "admin", "options"]
+    let header = ["username", "email", "admin", "options"]
     return header.map((key, index) => {
 
       if (key !== "options" ) {
@@ -305,7 +309,7 @@ handleErrors = () => {
     })
  }
  renderTableOptions() {
- return [<th key="search" colSpan="2"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
+ return [<th key="search" colSpan="2"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search username..." /></th>,
  <th key="new">
    
    <button onClick={this.toggleNewPopup}>

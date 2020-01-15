@@ -6,8 +6,6 @@ import './Nav.css'
     
 
     render() {    
-      
-      
   
      
       return (

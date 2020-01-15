@@ -13,9 +13,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      loggedIn : localStorage.getItem("token"),
-      isAdmin: localStorage.getItem("isAdmin")
-       
+      loggedIn : localStorage.getItem("token")
+      
      };
      
   }
@@ -83,7 +82,7 @@ render() {
       <div>
         <BrowserRouter>
         <div>
-          <Nav      loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} isAdmin = {this.state.isAdmin}/>
+          <Nav      loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} />
         
           <Switch>
             <Route 
