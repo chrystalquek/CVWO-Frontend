@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import './Nav.css'
 
   export default class Nav extends React.Component {
-
+    
 
     render() {    
       
       
+  
      
       return (
         <nav >
@@ -42,7 +43,7 @@ import './Nav.css'
                         <Link  to="/todos">Todos</Link>
                         </li>
                         {
-                          (this.props.isAdmin)
+                          (localStorage.removeItem("isAdmin"))
                           ?
                           <li className="goleft">
                           <Link  to="/users">Users</Link>

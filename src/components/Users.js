@@ -102,7 +102,7 @@ class Users extends Component {
       
       
       this.setState({
-        userss: list
+        users: list
       });
 
       this.handleSearch(this.state.query);
@@ -111,7 +111,7 @@ class Users extends Component {
 
     handleDelete = (userid) => {
 
-      const index1 = this.state.userss.findIndex(user => user.id === userid);
+      const index1 = this.state.users.findIndex(user => user.id === userid);
 
      
       this.state.users.splice(index1, 1);
