@@ -93,7 +93,7 @@ handleSubmit = (event) => {
 
 
 handleDelete = () => {
-    event.preventDefault()
+    
 
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userid")
@@ -103,10 +103,7 @@ handleDelete = () => {
             .then(response => {
 
 
-                this.props.closePopup(0)();
-
-
-                this.props.refresh(this.props.userid);
+                this.props.history.push('/');
                 
                 
             })
