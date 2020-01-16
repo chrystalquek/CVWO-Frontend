@@ -24,4 +24,4 @@ return (
     );
   }
 
-export default withRouter(AboutUs);
+export default AboutUs;
