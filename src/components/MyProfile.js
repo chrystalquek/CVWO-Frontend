@@ -16,7 +16,8 @@ class edituser extends Component {
     this.state = { 
       username: '',
       email: '',
-      showDeletePopup: false
+      showDeletePopup: false,
+      errors: ''
      };
 
     
@@ -102,26 +103,6 @@ handleSubmit = (event) => {
     }
 
 
-// handleDelete = () => {
-    
-
-//     const token = localStorage.getItem("token")
-//     const userid = localStorage.getItem("userid")
-    
-    
-//     axios.delete(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, { headers: {"Authorization" : `Bearer ${token}`} })
-//             .then(response => {
-
-
-//                 this.props.history.push('/');
-                
-                
-//             })
-// }
-
-
-
-
 handleErrors = () => {
     return (
       <div>
@@ -167,7 +148,6 @@ return (
           {this.state.showDeletePopup ?  
             <DeletePopup  
                     closePopup={this.toggleDeletePopup.bind(this)} 
-                    refresh={this.handleDelete.bind(this)}
             />  
             
             : null  
