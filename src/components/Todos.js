@@ -324,7 +324,7 @@ handleErrors = () => {
              {/* <td>{id[i]}</td> */}
              <td>{title[i]}</td>
              <td>{description[i]}</td>
-             { console.log(tag[i])
+             { 
                (tag[i] == "Urgent")
               ? <td className="Urgent">{tag[i]}</td>
               : (tag[i] == "Normal")
