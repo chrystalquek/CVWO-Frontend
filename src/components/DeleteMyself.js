@@ -20,11 +20,15 @@ handleSubmit = (event) => {
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userid");
     
-    console.log("here");
     axios.delete(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
+                localStorage.removeItem("token")
+                localStorage.removeItem("userid")
+                localStorage.removeItem("isAdmin")
+
                 this.props.history.push(`/`);
+
                 
             })
        
