@@ -42,7 +42,7 @@ return (
       <div className='popup'>
           <div className='popup_delete'>
         <h1>Are you sure you want to Delete Your Account? </h1>
-        <h2>You will be redirected to the Home Page</h2>
+        
         <form onSubmit={this.handleSubmit} >
         
           <button placeholder="submit" type="submit">

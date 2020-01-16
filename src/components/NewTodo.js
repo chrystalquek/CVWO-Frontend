@@ -38,9 +38,8 @@ handleSubmit = (event) => {
   const min = duedate.getUTCMinutes() > 9 ? duedate.getUTCMinutes().toString() : "0" + (duedate.getUTCMinutes()).toString();
 
   const date = duedate.getUTCFullYear().toString() + "-" + month + "-" + day
-      + "T" + hour + ":" + min + ":00.000Z"
+      + "T" + hour + ":" + min + ":00.000Z";
 
-  console.log(date)
   const token = localStorage.getItem("token")
   const userid = localStorage.getItem("userid")
   let todo = {
@@ -50,8 +49,6 @@ handleSubmit = (event) => {
       category: category,
       duedate: date
   }
-  console.log(duedate);
-
 
       axios.post(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
       .then(response => {

@@ -324,7 +324,8 @@ handleErrors = () => {
              {/* <td>{id[i]}</td> */}
              <td>{title[i]}</td>
              <td>{description[i]}</td>
-             {(tag[i] == "Urgent")
+             { console.log(tag[i])
+               (tag[i] == "Urgent")
               ? <td className="Urgent">{tag[i]}</td>
               : (tag[i] == "Normal")
                 ? <td className="Normal">{tag[i]}</td>
@@ -375,14 +376,15 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["Title", "Description", "Tag", "Category", "Due Date", "Options"]
+    let header = [["Title", "title"], ["Description", "description"], ["Tag", "tag"], ["Category", "category"], 
+      ["Due Date", "duedate"], ["Options", "options"]]
     return header.map((key, index) => {
 
-      if (key !== "Options" ) {
-        return <th key={index}>{key} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
+      if (key[0] !== "Options" ) {
+        return <th key={index}>{key[0]} <button onClick={this.sortby(key[1])}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
-       return <th key={index}>{key}  </th>
+       return <th key={index}>{key[0]} </th>
       }
     })
  }
