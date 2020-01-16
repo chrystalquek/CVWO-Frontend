@@ -258,14 +258,14 @@ handleErrors = () => {
              <td>{admin[i].toString()}</td>
 
             <td>
-              {id[i] === localStorage.getItem("userid") ? null :
+              {id[i] === localStorage.getItem("userid") ? null : 
               <span>
 
              <button onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
              
             
 
-            {this.state.showDeletePopup === id[i]?  
+            {(this.state.showDeletePopup === id[i])?  
             <DeletePopup  
                     userid={id[i]}
                     closePopup={this.toggleDeletePopup.bind(this)} 
@@ -275,6 +275,7 @@ handleErrors = () => {
             : null  
             }
             </span>
+          
           }
 
 

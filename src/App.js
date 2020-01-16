@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Todos from './components/Todos'
 import Users from './components/Users'
+import AboutUs from './components/Aboutus'
 
 
 class App extends Component {
@@ -113,6 +114,11 @@ render() {
             <Route exact path="/users" 
               render={props => (
               <Users {...props}  />
+              )}
+            />
+            <Route exact path="/aboutus" 
+              render={props => (
+              <AboutUs {...props}  />
               )}
             />
             

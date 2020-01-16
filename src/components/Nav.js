@@ -53,7 +53,13 @@ import './Nav.css'
                         </li>
                  </span>
           }
+                <span className="right">
+             
+                <li >
+                  <Link to="/aboutus">About Us</Link>
+                </li>
 
+                </span>
 
               
 
