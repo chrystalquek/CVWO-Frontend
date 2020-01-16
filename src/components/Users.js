@@ -258,7 +258,7 @@ handleErrors = () => {
              <td>{admin[i].toString()}</td>
 
             <td>
-              {id[i] === localStorage.getItem("userid") ? null : 
+              {id[i] == localStorage.getItem("userid") ? null : 
               <span>
 
              <button onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
@@ -298,19 +298,19 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["username", "email", "admin", "options"]
+    let header = ["Username", "Email", "Admin", "Options"]
     return header.map((key, index) => {
 
       if (key !== "options" ) {
-        return <th key={index}>{key.toUpperCase()} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
+        return <th key={index}>{key} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
-       return <th key={index}>{key.toUpperCase()}  </th>
+       return <th key={index}>{key}  </th>
       }
     })
  }
  renderTableOptions() {
- return [<th key="search" colSpan="2"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search username..." /></th>,
+ return [<th key="search" colSpan="3"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search username..." /></th>,
  <th key="new">
    
    <button onClick={this.toggleNewPopup}>

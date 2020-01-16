@@ -367,14 +367,14 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["id", "title", "description", "tag", "category", "duedate", "options"]
+    let header = ["Title", "Description", "Tag", "Category", "Duedate", "Options"]
     return header.map((key, index) => {
 
       if (key !== "options" ) {
-        return <th key={index}>{key.toUpperCase()} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
+        return <th key={index}>{key} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
-       return <th key={index}>{key.toUpperCase()}  </th>
+       return <th key={index}>{key}  </th>
       }
     })
  }
