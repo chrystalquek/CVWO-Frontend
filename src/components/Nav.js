@@ -40,6 +40,9 @@ import './Nav.css'
                         <li className="goleft">
                         <Link  to="/todos">Todos</Link>
                         </li>
+                        <li className="goleft">
+                        <Link  to="/profile">My Profile</Link>
+                        </li>
                         {
                           (localStorage.getItem("isAdmin"))
                           ?
