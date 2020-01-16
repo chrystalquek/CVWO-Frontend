@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import './LoginSignup.css'
 import Logo from './image2.jpg';
 import { faStickyNote } from "@fortawesome/free-solid-svg-icons";
