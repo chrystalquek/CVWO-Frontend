@@ -4,6 +4,9 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import './LoginSignup.css'
 import Logo from './image2.jpg';
+import DeletePopup from './DeleteMyself'
+import { faEdit, faTrashAlt, faSort, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 
@@ -12,7 +15,8 @@ class edituser extends Component {
     super(props);
     this.state = { 
       username: '',
-      email: ''
+      email: '',
+      showDeletePopup: false
      };
 
     
@@ -41,6 +45,12 @@ class edituser extends Component {
 
       
   }
+
+  toggleDeletePopup =   () =>
+    {
+    this.setState({  
+         showDeletePopup: !this.state.showDeletePopup
+    })}
 
 
 handleChange = (event) => {
@@ -149,10 +159,23 @@ return (
           <button placeholder="submit" type="submit">
             Submit Changes
           </button>
+
+          <button onClick={this.toggleDeletePopup}>
+          <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete User Account.
+          </button>
+
+          {this.state.showDeletePopup === id[i]?  
+            <DeletePopup  
+                    closePopup={this.toggleDeletePopup.bind(this)} 
+                    refresh={this.handleDelete.bind(this)}
+            />  
+            
+            : null  
+            }
  
           
             <div className = "errors" >
-          {this.state.errors ? this.handleErrors() : null}
+          {this.state.errors ? this.handleDelete : null}
           </div>
 
         </form> 
@@ -162,7 +185,7 @@ return (
        
         </div>
 
-        <div class="form-style-6">
+        {/* <div class="form-style-6">
         <h1>Delete User</h1>
         <form onSubmit={this.handleDelete} >
 
@@ -173,7 +196,7 @@ return (
     
         </form> 
        
-        </div>
+        </div> */}
 
 
       </div>

@@ -51,7 +51,7 @@ handleSubmit = (event) => {
           
         
 
-            this.props.closePopup();     
+              this.props.closePopup();     
               this.props.refresh(user);
               }
           
@@ -131,6 +131,8 @@ return (
           <button placeholder="submit" type="submit">
             Let's Sign Up!
           </button>
+
+          <button type="submit" onClick={this.props.closePopup(0)}>close me</button>  
 
           <div class = "errors" >
           {this.state.errors ? this.handleErrors() : null}
