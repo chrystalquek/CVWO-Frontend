@@ -102,22 +102,22 @@ handleSubmit = (event) => {
     }
 
 
-handleDelete = () => {
+// handleDelete = () => {
     
 
-    const token = localStorage.getItem("token")
-    const userid = localStorage.getItem("userid")
+//     const token = localStorage.getItem("token")
+//     const userid = localStorage.getItem("userid")
     
     
-    axios.delete(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
+//     axios.delete(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, { headers: {"Authorization" : `Bearer ${token}`} })
+//             .then(response => {
 
 
-                this.props.history.push('/');
+//                 this.props.history.push('/');
                 
                 
-            })
-}
+//             })
+// }
 
 
 
@@ -164,7 +164,7 @@ return (
           <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete User Account.
           </button>
 
-          {this.state.showDeletePopup === id[i]?  
+          {this.state.showDeletePopup ?  
             <DeletePopup  
                     closePopup={this.toggleDeletePopup.bind(this)} 
                     refresh={this.handleDelete.bind(this)}
