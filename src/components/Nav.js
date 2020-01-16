@@ -55,7 +55,7 @@ import './Nav.css'
           }
                 <span className="right">
              
-                <li >
+                <li className="goleft">
                   <Link to="/aboutus">About Us</Link>
                 </li>
 

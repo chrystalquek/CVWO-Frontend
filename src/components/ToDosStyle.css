@@ -19,7 +19,7 @@ table {
   tr:nth-child(odd){background-color: white}
   
   th {
-    background-color: #4CAF50;
+    background-color: black;
     color: white;
   }
 
@@ -50,7 +50,7 @@ table {
 .input:focus
 
 {
-	box-shadow: 0 0 5px #43D1AF;
+	box-shadow: 0 0 5px black;
 	padding: 3%;
-	border: 1px solid #43D1AF;
+	border: 1px solid black;
 }
