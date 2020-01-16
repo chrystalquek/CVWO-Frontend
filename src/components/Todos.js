@@ -324,12 +324,20 @@ handleErrors = () => {
              {/* <td>{id[i]}</td> */}
              <td>{title[i]}</td>
              <td>{description[i]}</td>
-             <td>{tag[i]}</td>
+             {(tag[i] === "Urgent")
+              ? <td className="Urgent">{tag[i]}</td>
+              : (tag[i] === "Normal")
+                ? <td className="Normal">{tag[i]}</td>
+                : (tag[i] === "Low")
+                  ? <td className="Low">{tag[i]}</td>
+                  : <td>{tag[i]}</td>
+            }
+             
              <td>{category[i]}</td>
              <td>{duedate[i].substr(0,10) + "  " + duedate[i].substr(11,8)}</td>
             <td>
 
-             <button onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
+             <button className ="urgent" onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
              
             
 
@@ -348,7 +356,7 @@ handleErrors = () => {
 
              {/* <div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } /> */}
 
-             <button onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
+             <button className = "normal" onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
              
 
          
@@ -367,10 +375,10 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["Title", "Description", "Tag", "Category", "Duedate", "Options"]
+    let header = ["Title", "Description", "Tag", "Category", "Due Date", "Options"]
     return header.map((key, index) => {
 
-      if (key !== "options" ) {
+      if (key !== "Options" ) {
         return <th key={index}>{key} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
