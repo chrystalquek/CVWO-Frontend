@@ -106,9 +106,7 @@ handleSubmit = (event) => {
 handleErrors = () => {
     return (
       <div>
-        <ul>{this.state.errors.map((error) => {
-          return <span key={error}>{error}<br></br></span>
-        })}</ul> 
+        {this.state.errors}
       </div>
     )
   }

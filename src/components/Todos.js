@@ -328,10 +328,10 @@ handleErrors = () => {
              { 
                (tag[i] == "Urgent")
               ? <td className="urgent">{tag[i]}</td>
-              : (tag[i] == "normal")
-                ? <td className="Normal">{tag[i]}</td>
-                : (tag[i] == "low")
-                  ? <td className="Low">{tag[i]}</td>
+              : (tag[i] == "Normal")
+                ? <td className="normal">{tag[i]}</td>
+                : (tag[i] == "Low")
+                  ? <td className="low">{tag[i]}</td>
                   : <td>{tag[i]}</td>
             }
              
