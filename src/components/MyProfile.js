@@ -141,15 +141,17 @@ return (
             Submit Changes
           </button>
 
+          <div className = "errors" >
+          {this.state.errors ? this.handleErrors() : null}
+          </div>
+
           <button type="submit" onClick={this.toggleDeletePopup}>
           <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete User Account.
           </button>
 
  
           
-            <div className = "errors" >
-          {this.state.errors ? this.handleDelete : null}
-          </div>
+            
 
         </form> 
 
