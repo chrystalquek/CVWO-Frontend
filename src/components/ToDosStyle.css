@@ -28,7 +28,7 @@ table {
   }
 
   .urgent {
-    background-color: rgb(122, 36, 36);
+    background-color: red;
   }
 
   .normal {

@@ -145,13 +145,6 @@ return (
           <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete User Account.
           </button>
 
-          {this.state.showDeletePopup ?  
-            <DeletePopup  
-                    closePopup={this.toggleDeletePopup.bind(this)} 
-            />  
-            
-            : null  
-            }
  
           
             <div className = "errors" >
@@ -159,6 +152,8 @@ return (
           </div>
 
         </form> 
+
+
 
 
 
@@ -177,6 +172,14 @@ return (
         </form> 
        
         </div> */}
+
+{this.state.showDeletePopup ?  
+            <DeletePopup  
+                    closePopup={this.toggleDeletePopup.bind(this)} 
+            />  
+            
+            : null  
+            }
 
 
       </div>

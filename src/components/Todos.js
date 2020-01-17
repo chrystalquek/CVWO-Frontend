@@ -317,6 +317,7 @@ handleErrors = () => {
     
 
     return todos.map((TODO, i) => {
+      console.log(tag[i]);
        
        return (
           <tr key={id[i]}>
