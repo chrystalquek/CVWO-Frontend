@@ -73,6 +73,7 @@ class Users extends Component {
             }
             
         })
+        .then(resp => resp.json())
         .then(response => {
           console.log(response)
             this.setState({ users: response.users, filtered: response.users });
