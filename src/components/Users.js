@@ -72,8 +72,9 @@ class Users extends Component {
                 Authorization: `Bearer ${token}`
             }
             
-        }).then(resp => resp.json())
+        })
         .then(response => {
+          console.log(response)
             this.setState({ users: response.users, filtered: response.users });
         })
     }

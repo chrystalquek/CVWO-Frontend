@@ -84,7 +84,7 @@ handleSubmit = (event) => {
             .then(response => {
 
               if (response.data.errors) {
-                console.log(response.data.errors)
+                
             
                 this.setState({errors: response.data.errors});
       
@@ -141,7 +141,7 @@ return (
             Submit Changes
           </button>
 
-          <button onClick={this.toggleDeletePopup}>
+          <button type="submit" onClick={this.toggleDeletePopup}>
           <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete User Account.
           </button>
 
