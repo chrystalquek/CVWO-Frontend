@@ -26,7 +26,7 @@ import './Nav.css'
           
           { 
         
-            (!this.props.loggedIn) ? 
+            (!localStorage.getItem("token")) ? 
                 <span className="goright">
                         <li className="goleft">
                         <Link  to="/login">Login</Link>
