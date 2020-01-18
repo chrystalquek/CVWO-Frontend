@@ -64,6 +64,8 @@ class Users extends Component {
     })}
 
     refreshPage = () => {
+
+      if (localStorage.getItem("isAdmin")){
         const token = localStorage.getItem("token");
         
 
@@ -78,6 +80,9 @@ class Users extends Component {
           console.log(response)
             this.setState({ users: response.users, filtered: response.users });
         })
+      } else {
+        console.log("unauthorized")
+      }
     }
 
     handleAdd = (user) => {
