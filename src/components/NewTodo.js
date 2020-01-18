@@ -67,7 +67,7 @@ handleSubmit = (event) => {
             duedate: date
         }
             
-            console.log(todo);
+            // console.log(todo);
               this.props.closePopup();     
               this.props.refresh(todo);
 

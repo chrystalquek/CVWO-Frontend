@@ -10,7 +10,7 @@ const Home = (props) => {
         const userid = localStorage.getItem("userid")
         
 
-        fetch(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, {
+        fetch(process.env.REACT_APP_API_ENDPOINT + `/test/${userid}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
