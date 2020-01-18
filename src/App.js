@@ -9,6 +9,7 @@ import Todos from './components/Todos'
 import Users from './components/Users'
 import AboutUs from './components/Aboutus'
 import Profile from './components/MyProfile'
+import Test from './components/Test'
 
 
 class App extends Component {
@@ -123,6 +124,11 @@ render() {
               )}
             />
             <Route exact path="/profile" 
+              render={props => (
+              <Profile {...props}  />
+              )}
+            />
+            <Route exact path="/test" 
               render={props => (
               <Profile {...props}  />
               )}

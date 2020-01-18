@@ -300,11 +300,11 @@ handleErrors = () => {
  }
 
  renderTableHeader() {
-    let header = ["Username", "Email", "Admin", "Options"]
+    let header = [["Username", "username"], ["Email", "email"], ["Admin", "admin"], "Options"];
     return header.map((key, index) => {
 
-      if (key !== "options" ) {
-        return <th key={index}>{key} <button onClick={this.sortby(key)}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
+      if (key !== "Options" ) {
+        return <th key={index}>{key[0]} <button onClick={this.sortby(key[1])}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
       } else {
        return <th key={index}>{key}  </th>
