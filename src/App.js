@@ -130,7 +130,7 @@ render() {
             />
             <Route exact path="/test" 
               render={props => (
-              <Profile {...props}  />
+              <Test {...props}  />
               )}
             />
             
