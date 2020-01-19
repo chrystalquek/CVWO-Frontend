@@ -21,7 +21,7 @@ class Users extends Component {
         showEditPopup: false,
         showNewPopup: false,
         showDeletePopup: false,
-        sortorder: true
+        sortorder: true,
        };
        this.handleSearch = this.handleSearch.bind(this);
        this.handleAdminChange = this.handleAdminChange.bind(this);

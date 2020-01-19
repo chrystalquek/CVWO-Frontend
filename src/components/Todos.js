@@ -392,7 +392,7 @@ handleErrors = () => {
  return [<th key="search" colSpan="5"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
  <th key="new">
    
-   <button onClick={this.toggleNewPopup}>
+   <button className = "new" onClick={this.toggleNewPopup}>
    <FontAwesomeIcon icon={faPlus} /> {' '}Add New </button> 
 
                     {this.state.showNewPopup ?  

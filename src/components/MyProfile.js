@@ -83,7 +83,7 @@ handleSubmit = (event) => {
     axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, {user}, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
-              if (response.data.errors) {
+              if (response.data.status === 500) {
                 
             
                 this.setState({errors: response.data.errors});
@@ -92,7 +92,7 @@ handleSubmit = (event) => {
 
 
                 this.setState({username: username,
-                    email: email});
+                    email: email, errors: 'User Saved'});
                 
                 
               }
