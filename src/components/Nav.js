@@ -2,7 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './Nav.css'
 
-  export default class Nav extends React.Component {
+class NavBar extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { 
+      loggedIn: localStorage.getItem("token"),
+      isAdmin: localStorage.getItem("isAdmin")
+
+     };
+  }
+  componentDidMount() {
+    this.setState({
+      loggedIn: localStorage.getItem("token"),
+      isAdmin: localStorage.getItem("isAdmin")
+
+    })
+    
+  }
     
 
     render() {    
@@ -75,3 +92,5 @@ import './Nav.css'
       );
     }
   }
+
+  export default NavBar;
