@@ -31,6 +31,8 @@ handleSubmit = (event) => {
   
   event.preventDefault()
   const {title, description, tag, category, duedate} = this.state
+  console.log(duedate.getUTCHours())
+  console.log(duedate.getHours())
   
   const month = duedate.getUTCMonth() >= 9 ? (duedate.getUTCMonth()  + 1).toString() : "0" + (duedate.getUTCMonth()  + 1).toString();
   const day = duedate.getUTCDate() > 9 ? duedate.getUTCDate().toString() : "0" + (duedate.getUTCDate()).toString();
