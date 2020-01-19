@@ -54,9 +54,17 @@
   }
 
   .link{
+
     text-decoration: none;
     color: black;
 
+  }
+
+  .link:hover {
+    background-color: purple;
+    text-decoration: underline;
+    border-radius: 25px;
+    background-color: #7FFFD4;
   }
 
   
