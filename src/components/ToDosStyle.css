@@ -28,15 +28,15 @@ table {
   }
 
   .urgent {
-    background-color: red !important;
+    background-color: #ee3d0c !important;
   }
 
   .normal {
-    background-color: yellow !important;
+    background-color: #FFFF66 !important;
   }
 
   .low {
-    background-color: green !important;
+    background-color: #9ACD32 !important;
   }
 
 

@@ -74,10 +74,12 @@ handleSubmit = (event) => {
     event.preventDefault()
     const {title, description, tag, category, duedate} = this.state
 
-    const month = duedate.getUTCMonth() >= 9 ? (duedate.getUTCMonth()  + 1).toString() : "0" + (duedate.getUTCMonth()  + 1).toString();
-  const day = duedate.getUTCDate() > 9 ? duedate.getUTCDate().toString() : "0" + (duedate.getUTCDate()).toString();
-  const hour = duedate.getUTCHours() > 9 ? duedate.getUTCHours().toString() : "0" + (duedate.getUTCHours()).toString();
-  const min = duedate.getUTCMinutes() > 9 ? duedate.getUTCMinutes().toString() : "0" + (duedate.getUTCMinutes()).toString();
+    
+    const month = duedate.getMonth() >= 9 ? (duedate.getMonth()  + 1).toString() : "0" + (duedate.getMonth()  + 1).toString();
+  const day = duedate.getDate() > 9 ? duedate.getDate().toString() : "0" + (duedate.getDate()).toString();
+  const hour = duedate.getHours() > 9 ? duedate.getHours().toString() : "0" + (duedate.getHours()).toString();
+  const min = duedate.getMinutes() > 9 ? duedate.getMinutes().toString() : "0" + (duedate.getMinutes()).toString();
+
 
   const date = duedate.getUTCFullYear().toString() + "-" + month + "-" + day
       + "T" + hour + ":" + min + ":00.000Z"
