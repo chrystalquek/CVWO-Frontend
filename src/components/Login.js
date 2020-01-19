@@ -54,7 +54,7 @@ class Login extends Component {
            if (data.data.admin){
             localStorage.setItem("isAdmin", data.data.admin);
            }
-            this.handleLogin()
+            this.handleLogin();
           }
         })
         .catch(error => console.log('api errors:', error))
@@ -111,7 +111,7 @@ return (
           </h2>
           
           </form>
-          <div className = "errors">
+          <div className = "loginerrors">
           {
             this.state.errors ? this.handleErrors() : null
           }

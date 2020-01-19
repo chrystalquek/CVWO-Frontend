@@ -169,14 +169,19 @@ return (
           <button placeholder="submit" type="submit">
             Delete
           </button>
-    
+    <EditPopup  
+                            todoid={id[i]}
+                            closePopup={this.toggleEditPopup.bind(this)} 
+                            refresh={this.handleEdit.bind(this)}
+                    />  
         </form> 
        
         </div> */}
 
 {this.state.showDeletePopup ?  
             <DeletePopup  
-                    closePopup={this.toggleDeletePopup.bind(this)} 
+                    closePopup={this.toggleDeletePopup.bind(this)}
+                    handleLogout={this.props.handleLogout.bind(this)}
             />  
             
             : null  

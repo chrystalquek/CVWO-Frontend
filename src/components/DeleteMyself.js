@@ -23,11 +23,13 @@ handleSubmit = (event) => {
     axios.delete(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, { headers: {"Authorization" : `Bearer ${token}`} })
             .then(response => {
 
-                localStorage.removeItem("token")
-                localStorage.removeItem("userid")
-                localStorage.removeItem("isAdmin")
+                this.props.handleLogout();
 
-                this.props.history.push(`/`);
+                // localStorage.removeItem("token")
+                // localStorage.removeItem("userid")
+                // localStorage.removeItem("isAdmin")
+
+                // this.props.history.push(`/`);
 
                 
             })

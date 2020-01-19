@@ -71,8 +71,7 @@ componentDidMount() {
 //   }
 // }, [])
 
-// Home, Login, Signup
-// Home, Signout, Todos
+
 
 
 render() {
@@ -125,14 +124,10 @@ render() {
             />
             <Route exact path="/profile" 
               render={props => (
-              <Profile {...props}  />
+              <Profile {...props} handleLogout={this.handleLogout}  />
               )}
             />
-            <Route exact path="/test" 
-              render={props => (
-              <Test {...props}  />
-              )}
-            />
+            
             
 
             <Redirect from='*' to='/' />

@@ -81,7 +81,7 @@
 	border: 1px solid #ccc;
 	padding: 3%;
 	text-align: center;
-	left: 50%;
+	margin-left: 30%;
 	
 	font: 95% Arial, Helvetica, sans-serif;
 }
@@ -139,6 +139,20 @@
    
 
 } 
+
+
+
+.form-style-6 div.loginerrors{
+    
+	
+	color: red;
+	margin-right: 8%;
+	
+	text-align: center;
+   
+
+} 
+
 
 
 .form-style-6 div.update{
