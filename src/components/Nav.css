@@ -48,9 +48,15 @@
 
    
     transform: translate(-50%, -50%);
-    font-size: xx-large;
-    color: white;
+    font-size: xxx-large;
+    
     text-decoration: none;
+  }
+
+  .link{
+    text-decoration: none;
+    color: black;
+
   }
 
   

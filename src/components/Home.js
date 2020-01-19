@@ -25,17 +25,17 @@ const Home = (props) => {
                 
     
             
-            <Link to='/logout' onClick={props.handleLogout}>Log Out</Link> <br></br>
+            <Link className="link" to='/logout' onClick={props.handleLogout}>Log Out</Link> <br></br>
             <br></br>
-            <Link to='/todos'>Back to ToDos</Link>
+            <Link className="link" to='/todos'>Back to ToDos</Link>
             
             </div>
             :
             <div >
             
-            <Link to='/login'>Log In</Link><br></br>
+            <Link className="link" to='/login'>Log In</Link><br></br>
             <br></br>
-            <Link to='/signup'>Sign Up</Link>
+            <Link className="link" to='/signup'>Sign Up</Link>
 
             </div>
     
