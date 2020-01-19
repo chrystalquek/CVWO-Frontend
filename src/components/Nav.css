@@ -44,11 +44,13 @@
     left: 50%;
     text-align: center;
     text-decoration: none;
+    border-radius: 25px;
+    background: grey;
 
    
     transform: translate(-50%, -50%);
-    font-size: xxx-large;
-    color: blue;
+    font-size: x-large;
+    color: white;
   }
 
   
