@@ -2,10 +2,10 @@
 
 table {
     border-collapse: collapse;
-    width: 70%;
+    width: 80%;
     text-align: center;
     position: fixed;
-    top: 25%;
+    top: 20%;
     left: 16%;
     table-layout: fixed;
     
@@ -31,12 +31,28 @@ table {
     background-color: #ee3d0c !important;
   }
 
+  .delete{
+    background-color: #ee3d0c !important;
+    border-radius: 25px;
+  }
+
   .normal {
     background-color: #FFFF66 !important;
   }
 
   .low {
     background-color: #9ACD32 !important;
+  }
+
+  .edit {
+    background-color: #9ACD32 !important;
+    border-radius: 25px;
+
+  }
+
+  .new{
+    border-radius: 25px;
+
   }
 
 

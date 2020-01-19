@@ -338,7 +338,7 @@ handleErrors = () => {
              <td>{duedate[i].substr(0,10) + "  " + duedate[i].substr(11,8)}</td>
             <td>
 
-             <button className ="urgent" onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
+             <button className ="delete" onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
              
             
 
@@ -357,7 +357,7 @@ handleErrors = () => {
 
              {/* <div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } /> */}
 
-             <button className = "normal" onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
+             <button className = "edit" onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
              
 
          
