@@ -11,7 +11,7 @@ class Signup extends Component {
     this.state = { 
       username: '',
       email: '',
-      admin: "false",
+      admin: "true",
       password: '',
       password_confirmation: '',
       errors: []
@@ -48,7 +48,12 @@ handleSubmit = (event) => {
           } else {
         
             // relogin after creating user
-            this.props.history.push('/login');
+            localStorage.setItem("token", data.data.jwt);
+            localStorage.setItem("userid", data.data.userid);
+           if (data.data.admin){
+            localStorage.setItem("isAdmin", data.data.admin);
+           }
+            this.props.history.push('/todos');
           }
         })
         // to reimplement error catching
@@ -109,13 +114,13 @@ return (
             onChange={this.handleChange}
           />
 
-          <label>
+          
           
           <select value={this.state.admin} onChange={this.handleAdminChange}>
             <option value="true">Admin</option>
             <option value="false">User</option>
           </select>
-        </label>
+        
         
           <button placeholder="submit" type="submit">
            Create user
