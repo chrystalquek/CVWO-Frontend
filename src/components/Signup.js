@@ -90,7 +90,7 @@ return (
     <div >
       <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
       <div class="form-style-6">
-        <h1>Create User</h1>
+        <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             placeholder="username"
