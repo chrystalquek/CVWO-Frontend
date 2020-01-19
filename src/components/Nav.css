@@ -44,14 +44,17 @@
     left: 50%;
     text-align: center;
     text-decoration: none;
-    border-radius: 25px;
-    background: grey;
+    font-family: "Marker Felt";
 
    
     transform: translate(-50%, -50%);
-    font-size: x-large;
+    font-size: xx-large;
     color: white;
+    text-decoration: none;
   }
+
+  
+
 
   
 
