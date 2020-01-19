@@ -1,5 +1,5 @@
 // plans to convert Home to Nav Bar
-import React from 'react';
+import React, {Component} from 'react';
 //import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Logo from './image.jpg';
@@ -7,6 +7,10 @@ import './Nav.css'
 
 
 const Home = (props) => {
+
+  console.log(localStorage.getItem("token"));
+
+  
     return (
       
         

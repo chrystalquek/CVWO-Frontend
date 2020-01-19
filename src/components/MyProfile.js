@@ -104,6 +104,7 @@ handleSubmit = (event) => {
 
 
 handleErrors = () => {
+  console.log(this.state.errors)
     return (
       <div>
         {this.state.errors}
