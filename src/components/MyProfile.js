@@ -104,7 +104,7 @@ handleSubmit = (event) => {
 
 
 handleErrors = () => {
-  console.log(this.state.errors)
+  
     return (
       <div>
         {this.state.errors}
@@ -140,7 +140,7 @@ return (
             Submit Changes
           </button>
 
-          <div className = "errors" >
+          <div className = "update" >
           {this.state.errors ? this.handleErrors() : null}
           </div>
 

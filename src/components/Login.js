@@ -106,9 +106,9 @@ return (
           <button placeholder="submit" type="submit">
             Log In
           </button>
-          <div>
+          <h2 > 
             or <Link to='/signup'>sign up</Link>
-          </div>
+          </h2>
           
           </form>
           <div className = "errors">

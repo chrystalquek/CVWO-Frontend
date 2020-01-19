@@ -36,7 +36,7 @@ handleSubmit = (event) => {
       password_confirmation: password_confirmation,
       admin: admin
     }
-    console.log(user);
+ 
     
     
     axios.post(process.env.REACT_APP_API_ENDPOINT  + '/users', {user})
