@@ -104,7 +104,7 @@ render() {
             <Route 
               exact path='/signup' 
               render={props => (
-              <Signup {...props}  />
+              <Signup {...props}  resetloggedIn={this.reset}/>
               )}
             />
             <Route exact path="/todos" 

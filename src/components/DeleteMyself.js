@@ -25,11 +25,12 @@ handleSubmit = (event) => {
 
                 this.props.handleLogout();
 
+
                 // localStorage.removeItem("token")
                 // localStorage.removeItem("userid")
                 // localStorage.removeItem("isAdmin")
 
-                // this.props.history.push(`/`);
+                 this.props.history.push(`/`);
 
                 
             })

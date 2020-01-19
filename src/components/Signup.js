@@ -53,6 +53,7 @@ handleSubmit = (event) => {
            if (response.data.admin){
             localStorage.setItem("isAdmin", response.data.admin);
            }
+           this.props.resetLoggedIn()
             this.props.history.push('/todos');
           }
         })
