@@ -24,6 +24,13 @@ handleChange = (event) => {
       [name]: value
     })
   };
+
+  handleLogin = () => {
+    //direct to todos index using users.id
+    this.props.resetloggedIn();
+    this.props.history.push(`/todos`);
+}
+
 handleSubmit = (event) => {
   
     event.preventDefault()
@@ -53,8 +60,7 @@ handleSubmit = (event) => {
            if (response.data.admin){
             localStorage.setItem("isAdmin", response.data.admin);
            }
-           this.props.resetLoggedIn()
-            this.props.history.push('/todos');
+           this.handleLogin();
           }
         })
         // to reimplement error catching
