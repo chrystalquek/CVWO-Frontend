@@ -48,10 +48,10 @@ handleSubmit = (event) => {
           } else {
         
             // relogin after creating user
-            localStorage.setItem("token", data.data.jwt);
-            localStorage.setItem("userid", data.data.userid);
-           if (data.data.admin){
-            localStorage.setItem("isAdmin", data.data.admin);
+            localStorage.setItem("token", response.data.jwt);
+            localStorage.setItem("userid", response.data.userid);
+           if (response.data.admin){
+            localStorage.setItem("isAdmin", response.data.admin);
            }
             this.props.history.push('/todos');
           }
