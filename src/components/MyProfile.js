@@ -118,7 +118,7 @@ render() {
 return (
       <div> <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
       <div class="form-style-6">
-        <h1>Edit User</h1>
+        <h1>Edit Profile</h1>
         <form onSubmit={this.handleSubmit} >
           <input
             placeholder="username"
@@ -145,7 +145,7 @@ return (
           </div>
 
           <button type="submit" onClick={this.toggleDeletePopup}>
-          <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete User Account.
+          <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete Account.
           </button>
 
  
@@ -161,22 +161,7 @@ return (
        
         </div>
 
-        {/* <div class="form-style-6">
-        <h1>Delete User</h1>
-        <form onSubmit={this.handleDelete} >
-
         
-          <button placeholder="submit" type="submit">
-            Delete
-          </button>
-    <EditPopup  
-                            todoid={id[i]}
-                            closePopup={this.toggleEditPopup.bind(this)} 
-                            refresh={this.handleEdit.bind(this)}
-                    />  
-        </form> 
-       
-        </div> */}
 
 {this.state.showDeletePopup ?  
             <DeletePopup  
