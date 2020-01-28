@@ -13,6 +13,7 @@ table {
   
   th, td {
     width: auto;
+    height: auto;
     height: fixed;
     padding: 3px, 1px;
   }
