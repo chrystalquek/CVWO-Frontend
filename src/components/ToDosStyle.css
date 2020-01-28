@@ -11,11 +11,19 @@ table {
     
   }
   
-  th, td {
+ td {
     width: auto;
     height: 50px;
     height: fixed;
     padding: 3px, 1px;
+  }
+
+  th{
+    width: auto;
+    height: 30px;
+    height: fixed;
+    padding: 3px, 1px;
+
   }
   
   tr:nth-child(even){background-color: #f2f2f2}
