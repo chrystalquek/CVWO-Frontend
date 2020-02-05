@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import './Popup.css'
 
 
-
+// only allowed for admin
 class deleteuser extends Component {
   constructor(props) {
     super(props);
@@ -19,21 +19,12 @@ handleSubmit = (event) => {
 
     const token = localStorage.getItem("token")
     
-    
     axios.delete(process.env.REACT_APP_API_ENDPOINT + `/users/${this.props.userid}`, { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
-
-
-                this.props.closePopup(0)();
-
-
-                this.props.refresh(this.props.userid);
-                
-                
-            })
-       
-        
-    }
+      .then(response => {
+          this.props.closePopup(0)();
+          this.props.refresh(this.props.userid);
+      })
+}
 
 
 render() {
@@ -48,10 +39,9 @@ return (
             Yes
           </button>
 
-          
-      
         </form> 
         <div>
+          {/* close popup upon deletion. closepopup is passed as props from usertable */}
             <button type="submit" onClick={this.props.closePopup(0)}>Close</button>  
         </div>
         <div>

@@ -9,8 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 var jsonQuery = require('json-query')
 
-
-
 class Users extends Component {
     constructor(props) {
       super(props);
@@ -28,12 +26,9 @@ class Users extends Component {
     }
 
 
-    componentDidMount() {
-      
-      this.refreshPage();
-    }
-   
-
+  componentDidMount() {
+    this.refreshPage();
+  }
 
   handleChange = (event) => {
       const {name, value} = event.target
@@ -41,39 +36,37 @@ class Users extends Component {
         [name]: value
       })
     }
-
-    
-            
-            
+         
     toggleEditPopup = (userid) =>  () =>
     {
-    this.setState({  
-         showEditPopup: userid 
-    })}
+      this.setState({  
+            showEditPopup: userid 
+      })
+    }
 
-    toggleNewPopup =   () =>
+    toggleNewPopup = () =>
     {
-    this.setState({  
-         showNewPopup: !this.state.showNewPopup 
-    })}
+      this.setState({  
+            showNewPopup: !this.state.showNewPopup 
+      })
+    }
 
-    toggleDeletePopup =   (userid) =>  () =>
+    toggleDeletePopup = (userid) => () =>
     {
-    this.setState({  
-         showDeletePopup: userid 
-    })}
+      this.setState({  
+            showDeletePopup: userid 
+      })
+    }
 
     refreshPage = () => {
 
       if (localStorage.getItem("isAdmin")){
         const token = localStorage.getItem("token");
-        
-
+      
         fetch(process.env.REACT_APP_API_ENDPOINT + `/users`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-            
         })
         .then(resp => resp.json())
         .then(response => {
@@ -88,7 +81,6 @@ class Users extends Component {
     handleAdd = (user) => {
 
       let list = this.state.users;
-      
       list.push(user);
       
       this.setState({
@@ -101,12 +93,10 @@ class Users extends Component {
 
 
     handleEdit = (user) => {
-      
 
       const index = this.state.users.findIndex(anyuser => anyuser.id === user.id);
       let list = this.state.users;
-      list[index] = user;
-      
+      list[index] = user;  
       
       this.setState({
         users: list
@@ -120,28 +110,18 @@ class Users extends Component {
 
       const index1 = this.state.users.findIndex(user => user.id === userid);
 
-     
       this.state.users.splice(index1, 1);
 
-      
       this.setState({ users: this.state.users });
 
       this.handleSearch(this.state.query);
-      
-      
+
     }
 
     handleAdminChange(event) {
-  
         this.setState({admin: event.target.value});
-      }
+    }
       
-
-
-
-
-
-
     handleSearch(e) {
       // Variable to hold the original version of the list
       
@@ -150,9 +130,6 @@ class Users extends Component {
       let newList = [];
 
       let query = ((typeof e === 'string' || e instanceof String) ) ? e : e.target.value;
-
-
-      
 
           // If the search bar isn't empty
       if (query !== "") {
@@ -184,8 +161,7 @@ class Users extends Component {
 }
 
 sortby = (factor) => () => {
-  
-  
+
   let newList = this.state.filtered;
   
       if (this.state.sortorder) {
@@ -223,10 +199,6 @@ sortby = (factor) => () => {
 }
 
 
-
-
-
-
 handleErrors = () => {
     return (
       <div>
@@ -240,13 +212,8 @@ handleErrors = () => {
     )
   }
 
-  
-
-  
-
   renderTableData() {
     
-
     let users = Array.from(this.state.filtered)
 
     var id = jsonQuery('[*][id]', { data: this.state.filtered }).value
@@ -269,8 +236,6 @@ handleErrors = () => {
               <span>
 
              <button onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
-             
-            
 
             {(this.state.showDeletePopup === id[i])?  
             <DeletePopup  
@@ -284,12 +249,7 @@ handleErrors = () => {
             </span>
           
           }
-
-
              <button onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
-             
-
-         
 
                     {this.state.showEditPopup === id[i]?  
                     <EditPopup  
@@ -331,15 +291,9 @@ handleErrors = () => {
                     : null  
                     } 
    
-   
-   
-   
    </th>] 
-  
-  
+
 }
-
-
 
 
 render() {
@@ -347,7 +301,6 @@ render() {
      return (
        <div >
          <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
-         {/* <input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /> */}
            
            <table >
                <tbody>
@@ -357,7 +310,6 @@ render() {
                </tbody>
             </table>
 
-            
         </div>
      );
      }

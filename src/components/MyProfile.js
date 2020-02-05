@@ -5,9 +5,8 @@ import { withRouter } from 'react-router-dom';
 import './LoginSignup.css'
 import Logo from './image2.jpg';
 import DeletePopup from './DeleteMyself'
-import { faEdit, faTrashAlt, faSort, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 
 
 class edituser extends Component {
@@ -19,8 +18,6 @@ class edituser extends Component {
       showDeletePopup: false,
       errors: ''
      };
-
-    
      
   }
 
@@ -30,28 +27,24 @@ class edituser extends Component {
     const token = localStorage.getItem("token")
     
     axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
+      .then(response => {
 
-              const user = response.data.user;
-              
-
-              this.setState({
-                username: user.username,
-                email: user.email
-              })
-
-
-                
-            })
-
+        const user = response.data.user;
+        
+        this.setState({
+          username: user.username,
+          email: user.email
+        })
+      })
       
   }
 
-  toggleDeletePopup =   () =>
+  toggleDeletePopup = () =>
     {
-    this.setState({  
-         showDeletePopup: !this.state.showDeletePopup
-    })}
+      this.setState({  
+          showDeletePopup: !this.state.showDeletePopup
+      })
+    }
 
 
 handleChange = (event) => {
@@ -62,7 +55,7 @@ handleChange = (event) => {
   };
 
  
-  
+// update user's email and username but ensure that new email &/ username are unique. otherwise display error
 handleSubmit = (event) => {
   
     event.preventDefault()
@@ -76,35 +69,22 @@ handleSubmit = (event) => {
         email: email
     }
 
-    
-
     const token = localStorage.getItem("token")
     
     axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}`, {user}, { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
-
-              if (response.data.status === 500) {
-                
-            
-                this.setState({errors: response.data.errors});
-      
-              } else {
-
-
-                this.setState({username: username,
-                    email: email, errors: 'User Saved'});
-                
-                
-              }
-                
-            })
-       
-        
+      .then(response => {
+        if (response.data.status === 500) {
+          // if new username / email cannot be saved, errors
+          this.setState({errors: response.data.errors});
+        } else {
+          this.setState({username: username,
+              email: email, errors: 'User Saved'});
+        }
+      })
     }
 
 
 handleErrors = () => {
-  
     return (
       <div>
         {this.state.errors}
@@ -148,35 +128,20 @@ return (
           <FontAwesomeIcon icon={faTrashAlt} /> {' '}Alternatively, Delete Account.
           </button>
 
- 
-          
-            
-
         </form> 
-
-
-
-
-
        
-        </div>
+      </div>
 
-        
-
-{this.state.showDeletePopup ?  
+          {this.state.showDeletePopup ?  
             <DeletePopup  
-                    closePopup={this.toggleDeletePopup.bind(this)}
-                    handleLogout={this.props.handleLogout.bind(this)}
+              closePopup={this.toggleDeletePopup.bind(this)}
+              handleLogout={this.props.handleLogout.bind(this)}
             />  
-            
             : null  
-            }
-
+          }
 
       </div>
     );
   }
 }
 export default withRouter(edituser);
-
-//this.props.closePopup

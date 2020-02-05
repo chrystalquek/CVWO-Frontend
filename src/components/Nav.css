@@ -1,6 +1,3 @@
-
-
-
 .navbar ul {
     list-style-type: none;
     margin: 0;
@@ -11,61 +8,55 @@
     top: 0;
     width: 100%;
     
-  }
+}
 
-  .navbar  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+.navbar  li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.navbar li a:hover {
+  background-color: #111;
+}
   
-  /* Change the link color to #111 (black) on hover */
-  .navbar li a:hover {
-    background-color: #111;
-  }
-  
-  .navbar li.goright,
-  .navbar span.goright{
-    float: right;
-    
-  }
+/* position links at left or right of navbar */
+.navbar li.goright,
+.navbar span.goright{
+  float: right;
+}
 
-  .navbar li.goleft,
-  .navbar span.goleft{
-   
-    float: left;
-  }
+.navbar li.goleft,
+.navbar span.goleft{
+  float: left;
+}
 
-  .home div{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    text-decoration: none;
-    font-family: "Marker Felt";
+.home div{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  text-decoration: none;
+  font-family: "Marker Felt";
+  transform: translate(-50%, -50%);
+  font-size: xxx-large;
+  text-decoration: none;
+}
 
-   
-    transform: translate(-50%, -50%);
-    font-size: xxx-large;
-    
-    text-decoration: none;
-  }
+.link{
+  text-decoration: none;
+  color: black;
+}
 
-  .link{
-
-    text-decoration: none;
-    color: black;
-
-  }
-
-  .link:hover {
-    background-color: purple;
-    text-decoration: underline;
-    border-radius: 25px;
-    background-color: #7FFFD4;
-  }
+.link:hover {
+  background-color: purple;
+  text-decoration: underline;
+  border-radius: 25px;
+  background-color: #7FFFD4;
+}
 
   
 

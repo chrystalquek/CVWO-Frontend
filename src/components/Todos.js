@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import axios from 'axios'
-// import {Link} from 'react-router-dom'
 import EditPopup from "./EditTodo"
 import NewPopup from "./NewTodo"
 import DeletePopup from "./DeleteTodo"
@@ -9,9 +7,8 @@ import Logo from './image.jpg';
 import { faEdit, faTrashAlt, faSort, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+// jsonQuery to access fields like title, description...
 var jsonQuery = require('json-query')
-
-
 
 class Todos extends Component {
     constructor(props) {
@@ -29,46 +26,45 @@ class Todos extends Component {
     }
 
 
-    componentDidMount() {
-      
-      this.refreshPage();
-    }
+  componentDidMount() {
+    this.refreshPage();
+  }
    
-
-
+  // render inputted fields
   handleChange = (event) => {
       const {name, value} = event.target
       this.setState({
         [name]: value
       })
-    }
+  }
 
-    
-            
-            
-    toggleEditPopup = (todoid) =>  () =>
+  // 3 different toggling popup methods - edit, delete, add
+  toggleEditPopup = (todoid) =>  () =>
     {
     this.setState({  
          showEditPopup: todoid 
-    })}
+    }
+  )}
 
-    toggleNewPopup =   () =>
+  toggleNewPopup = () =>
     {
     this.setState({  
          showNewPopup: !this.state.showNewPopup 
-    })}
+    }
+  )}
 
-    toggleDeletePopup =   (todoid) =>  () =>
+  toggleDeletePopup = (todoid) => () =>
     {
     this.setState({  
          showDeletePopup: todoid 
-    })}
+    }
+  )}
 
+  // general way to refreshPage to obtain updated todos
     refreshPage = () => {
         const token = localStorage.getItem("token")
         const userid = localStorage.getItem("userid")
         
-
         fetch(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -80,51 +76,28 @@ class Todos extends Component {
         })
     }
 
+    // add new/edited todos to this.state.todos instead of making new api call
+    // rerendering from state
+
     handleAdd = (todo) => {
 
       let list = this.state.todos;
-      // console.log(list);
-      
-      
+
       list.push(todo);
-      // console.log(list);
-      // let list2 = this.state.filtered;
-      // // Then we use that to set the state for list
-      // // console.log(this.state.filtered);
-      // if ( todo.tag.toLowerCase().includes(this.state.query) ) {
-      //   list2.push(todo);
-      //   // console.log(this.state.filtered);
-      // }
+
       this.setState({
         todos: list
       });
 
       this.handleSearch(this.state.query);
       
-      
-      // Finally, we need to reset the form
-      
     }
 
 
     handleEdit = (todo) => {
-      
-      
-      // Then we use that to set the state for list
-      // Finally, we need to reset the form
-
       const index = this.state.todos.findIndex(ToDo => ToDo.id === todo.id);
       let list = this.state.todos;
       list[index] = todo;
-      
-
-
-      // still show in filtered list even if tag does not suit
-      // let list2 = this.state.filtered;
-      // Then we use that to set the state for list
-      
-      // const index2 = this.state.filtered.findIndex(ToDo => ToDo.id === todo.id);
-      // list2[index2] = todo;
       
       this.setState({
         todos: list
@@ -137,85 +110,60 @@ class Todos extends Component {
     handleDelete = (todoid) => {
 
       const index1 = this.state.todos.findIndex(ToDo => ToDo.id === todoid);
-
-     
       this.state.todos.splice(index1, 1);
-
-      
-      // const index = this.state.filtered.findIndex(ToDo => ToDo.id === todoid);
-      // // console.log("in filtered")
-      // console.log(index);
-      // this.state.filtered.splice(index, 1);
-      
       this.setState({ todos: this.state.todos });
-
       this.handleSearch(this.state.query);
-      
-      
+
     }
-
-
-
-
-
 
     handleSearch(e) {
       // Variable to hold the original version of the list
-      
       let currentList = [];
-          // Variable to hold the filtered list before putting into state
+      // Variable to hold the filtered list before putting into state
       let newList = [];
 
       let query = ((typeof e === 'string' || e instanceof String) ) ? e : e.target.value;
 
-
-      
-
-          // If the search bar isn't empty
+      // If the search bar isn't empty
       if (query !== "") {
-              // Assign the original list to currentList
+        // Assign the original list to currentList
         currentList = this.state.todos;
 
-              // Use .filter() to determine which items should be displayed
-              // based on the search terms
+        // Use .filter() to determine which items should be displayed
+        // based on the search terms
         newList = currentList.filter(item => {
-                  // change current item to lowercase
+          // change current item to lowercase
           const lc = item.tag.toLowerCase();
-                  // change search term to lowercase
+          // change search term to lowercase
           const filter = query.toLowerCase();
-                  // check to see if the current list item includes the search term
-                  // If it does, it will be added to newList. Using lowercase eliminates
-                  // issues with capitalization in search terms and search content
+          // check to see if the current list item includes the search term
+          // If it does, it will be added to newList. Using lowercase eliminates
+          // issues with capitalization in search terms and search content
           return lc.includes(filter);
         });
       } else {
-              // If the search bar is empty, set newList to original task list
+        // If the search bar is empty, set newList to original task list
         newList = this.state.todos;
       }
-          // Set the filtered state based on what our rules added to newList
-      this.setState({
-        filtered: newList,
-        query: query.toLowerCase()
-      });
+        // Set the filtered state based on what our rules added to newList
+        this.setState({
+          filtered: newList,
+          query: query.toLowerCase()
+        });
 }
 
-sortby = (factor) => () => {
-  
-  
-  let newList = this.state.filtered;
-  if (factor == "duedate") {
-        //string.substr(start, length)
-
-        //2019-03-22 23:59:59
-
+// generic sortby method, accepts any header title
+  sortby = (factor) => () => {
+    
+    let newList = this.state.filtered;
+    if (factor == "duedate") {
+        // check boolean which determines which ascending or descending
         if (this.state.sortorder) {
 
         newList = newList.sort(function (a, b) {
           
           let c = new Date(b.duedate);
           let d = new Date(a.duedate);
-         
-          
 
           if (c > d) {
             return -1;
@@ -226,13 +174,10 @@ sortby = (factor) => () => {
           return 0;
         });} else {
           newList = newList.sort(function (a, b) {
-            // Turn your strings into dates, and then subtract them
-            // to get a value that is either negative, positive, or zero.
+
             let c = new Date(b.duedate);
             let d = new Date(a.duedate);
-           
-            
-  
+
             if (c > d) {
               return 1;
               }
@@ -241,10 +186,8 @@ sortby = (factor) => () => {
             }
             return 0;
 
-        })}
-        
-
-  
+        })
+  }
 
   } else {
       if (this.state.sortorder) {
@@ -257,7 +200,7 @@ sortby = (factor) => () => {
               return 1;
           }
           return 0;
-      } );
+        } );
         
       } else {
         newList = newList.sort(function (a, b) {
@@ -268,23 +211,16 @@ sortby = (factor) => () => {
               return -1;
           }
           return 0;
-      }  );
+        }  );
       }
   }
   
-  
-
   this.setState({
     filtered: newList,
     sortorder: !this.state.sortorder
     
   })
 }
-
-
-
-
-
 
 handleErrors = () => {
     return (
@@ -299,9 +235,6 @@ handleErrors = () => {
     )
   }
 
-  
-
-  
 
   renderTableData() {
     
@@ -321,7 +254,6 @@ handleErrors = () => {
        return (
           <tr key={id[i]}>
             
-             {/* <td>{id[i]}</td> */}
              <td>{title[i]}</td>
              <td>{description[i]}</td>
              { 
@@ -351,17 +283,8 @@ handleErrors = () => {
             
             : null  
             }
-
-
-
-
-             {/* <div className='delete-button' onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.onCancel(item) } } /> */}
-
              <button className = "edit" onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
              
-
-         
-
                     {this.state.showEditPopup === id[i]?  
                     <EditPopup  
                             todoid={id[i]}
@@ -388,6 +311,7 @@ handleErrors = () => {
       }
     })
  }
+
  renderTableOptions() {
  return [<th key="search" colSpan="5"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
  <th key="new">
@@ -395,31 +319,23 @@ handleErrors = () => {
    <button className = "new" onClick={this.toggleNewPopup}>
    <FontAwesomeIcon icon={faPlus} /> {' '}Add New </button> 
 
-                    {this.state.showNewPopup ?  
-                    <NewPopup  
-                    closePopup={this.toggleNewPopup.bind(this)} 
-                    refresh={this.handleAdd.bind(this)}
-                    />    
-                    : null  
-                    } 
-   
-   
-   
+      {this.state.showNewPopup ?  
+      <NewPopup  
+      closePopup={this.toggleNewPopup.bind(this)} 
+      refresh={this.handleAdd.bind(this)}
+      />    
+      : null  
+      }
    
    </th>] 
   
-  
 }
 
-
-
-
 render() {
-    
+
      return (
        <div >
          <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
-         {/* <input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /> */}
            
            <table >
                <tbody>

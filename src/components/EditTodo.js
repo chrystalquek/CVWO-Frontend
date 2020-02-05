@@ -15,9 +15,12 @@ class edittodo extends Component {
       description: '',
       tag: 'Urgent',
       category: '',
+      // create a new date object
       duedate: new Date(),
       errors: []
      };
+
+     // so that tags and dates are rerendered when changed
      this.handleTagChange = this.handleTagChange.bind(this);
      this.handleDateChange = this.handleDateChange.bind(this);
   }
@@ -27,62 +30,52 @@ class edittodo extends Component {
     const token = localStorage.getItem("token")
     const userid = localStorage.getItem("userid")
     axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
+      .then(response => {
+        const todo = response.data.todo;
 
-              const todo = response.data.todo;
+        let date = new Date(todo.duedate.substr(0,19));
+        
+        this.setState({
+          title: todo.title,
+          description: todo.description,
+          tag: todo.tag,
+          category: todo.category,
+          duedate: date
+        })
+          
+      })
 
-              let date = new Date(todo.duedate.substr(0,19));
-              console.log(date);
-
-              
-
-              this.setState({
-                title: todo.title,
-                description: todo.description,
-                tag: todo.tag,
-                category: todo.category,
-                duedate: date
-              })
-
-
-                
-            })
-
-      
   }
 
 
-handleChange = (event) => {
-    const {name, value} = event.target
-    this.setState({
-      [name]: value
-    })
-  };
+  handleChange = (event) => {
+      const {name, value} = event.target
+      this.setState({
+        [name]: value
+      })
+    };
 
   handleTagChange(event) {
-  
     this.setState({tag: event.target.value});
   }
 
   handleDateChange(date) {
-  
     this.setState({duedate: date});
   }
 
-handleSubmit = (event) => {
+  handleSubmit = (event) => {
   
     event.preventDefault()
     const {title, description, tag, category, duedate} = this.state
 
-    
+    // due to timezone offsets, necessary to change datetime to localtime
     const month = duedate.getMonth() >= 9 ? (duedate.getMonth()  + 1).toString() : "0" + (duedate.getMonth()  + 1).toString();
-  const day = duedate.getDate() > 9 ? duedate.getDate().toString() : "0" + (duedate.getDate()).toString();
-  const hour = duedate.getHours() > 9 ? duedate.getHours().toString() : "0" + (duedate.getHours()).toString();
-  const min = duedate.getMinutes() > 9 ? duedate.getMinutes().toString() : "0" + (duedate.getMinutes()).toString();
+    const day = duedate.getDate() > 9 ? duedate.getDate().toString() : "0" + (duedate.getDate()).toString();
+    const hour = duedate.getHours() > 9 ? duedate.getHours().toString() : "0" + (duedate.getHours()).toString();
+    const min = duedate.getMinutes() > 9 ? duedate.getMinutes().toString() : "0" + (duedate.getMinutes()).toString();
 
 
-  const date = duedate.getUTCFullYear().toString() + "-" + month + "-" + day
-      + "T" + hour + ":" + min + ":00.000Z"
+    const date = duedate.getUTCFullYear().toString() + "-" + month + "-" + day + "T" + hour + ":" + min + ":00.000Z";
 
     let todo = {
         id: this.props.todoid,
@@ -94,40 +87,25 @@ handleSubmit = (event) => {
     }
 
 
-    
-
-    const token = localStorage.getItem("token")
-    const userid = localStorage.getItem("userid")
-    axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
-
-              if (response.data.errors) {
-                console.log(response.data.errors)
-            
-                this.setState({errors: response.data.errors});
       
-              } else {
 
+      const token = localStorage.getItem("token")
+      const userid = localStorage.getItem("userid")
+      axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${userid}/todos/${this.props.todoid}`, {todo}, { headers: {"Authorization" : `Bearer ${token}`} })
+        .then(response => {
 
-                this.props.closePopup(0)();
+          if (response.data.errors) {
+            this.setState({errors: response.data.errors});
 
+          } else {
+            this.props.closePopup(0)();
+            this.props.refresh(todo);
+          }
+            
+        })
+  }
 
-                this.props.refresh(todo);
-                
-                
-              }
-                
-            })
-       
-        
-    }
-
-
-
-
-
-
-handleErrors = () => {
+  handleErrors = () => {
     return (
       <div>
         <ul>{this.state.errors.map((error) => {
@@ -138,9 +116,9 @@ handleErrors = () => {
   }
 
 
-render() {
+  render() {
     const {title, description, tag, category, duedate} = this.state
-return (
+      return (
       <div className='popup'>
           <div className='popup_inner'>
         <h1>Edit ToDo</h1>
@@ -176,14 +154,14 @@ return (
             onChange={this.handleChange}
           />
           <DatePicker
-                  selected={this.state.duedate}
-                  onChange={this.handleDateChange}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={60}
-                  timeCaption="time"
-                  dateFormat="MMMM d, yyyy h:mm aa"
-                />
+            selected={this.state.duedate}
+            onChange={this.handleDateChange}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={60}
+            timeCaption="time"
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
 
         
           <button placeholder="submit" type="submit">
@@ -191,26 +169,17 @@ return (
           </button>
 
           
-            <button type="submit" onClick={this.props.closePopup(0)}>close me</button>  
+          <button type="submit" onClick={this.props.closePopup(0)}>close me</button>  
           
-            <div className = "errors" >
-          {this.state.errors ? this.handleErrors() : null}
+          <div className = "errors" >
+            {this.state.errors ? this.handleErrors() : null}
           </div>
-
-          
       
         </form> 
         
-        {/* <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
-        </div> */}
         </div>
       </div>
     );
   }
 }
 export default withRouter(edittodo);
-
-//this.props.closePopup

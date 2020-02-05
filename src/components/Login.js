@@ -5,64 +5,59 @@ import './LoginSignup.css'
 import Logo from './image2.jpg';
 
 
-
+// possible to add email field to login but not necessary
 class Login extends Component {
     constructor(props) {
       super(props);
       this.state = { 
         username: '',
-        // email: '',
         password: '',
         errors: ''
        };
     }
-    componentDidMount() {
-      
-    }
+
   handleChange = (event) => {
       const {name, value} = event.target
       this.setState({
         [name]: value
       })
-    };
+  };
 
-    handleLogin = () => {
-        //direct to todos index using users.id
-        this.props.resetloggedIn();
-        this.props.history.push(`/todos`);
-    }
+  handleLogin = () => {
+      //direct to todos index using users.id
+      this.props.resetloggedIn();
+      this.props.history.push(`/todos`);
+  }
 
     handleSubmit = (event) => {
         event.preventDefault()
         const {username, password} = this.state
-    let user = {
+        let user = {
           username: username,
-          //email: email,
           password: password
         }
-        // console.log(user);
-
         
         axios.post(process.env.REACT_APP_API_ENDPOINT + '/login', {user})
         .then(data => {
           if (data.data.failure){
+            // default error displayed if login credentials are invalid
             this.setState({errors: ["Username / Password Invalid"]})
 
           } else {
             localStorage.setItem("token", data.data.jwt);
             localStorage.setItem("userid", data.data.userid);
-           if (data.data.admin){
-            localStorage.setItem("isAdmin", data.data.admin);
-           }
+              if (data.data.admin){
+                localStorage.setItem("isAdmin", data.data.admin);
+              }
             this.handleLogin();
           }
         })
-        .catch(error => console.log('api errors:', error))
-      };
+       
+        .catch(error => this.setState({errors: [error]}))
+    }
       
 
-handleErrors = () => {
-  
+  handleErrors = () => {
     return (
       <div >
         <ul >
@@ -75,15 +70,10 @@ handleErrors = () => {
     )
   }
 
-
-
-
-
-
 render() {
     const {username, password} = this.state
-return (
-  <div className = "container">
+  return (
+    <div className = "container">
         <img src={Logo} width="100%" height="100%" overflow="hidden"></img>
         <div className="form-style-6">
 

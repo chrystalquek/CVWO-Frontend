@@ -1,5 +1,3 @@
-
-
 table {
     border-collapse: collapse;
     width: 80%;
@@ -8,77 +6,60 @@ table {
     top: 20%;
     left: 11%;
     table-layout: fixed;
-    
-  }
+}
+
+td {
+  width: auto;
+  height: 50px;
+  height: fixed;
+  padding: 3px, 1px;
+}
+
+th {
+  width: auto;
+  height: 30px;
+  height: fixed;
+  padding: 3px, 1px;
+}
   
- td {
-    width: auto;
-    height: 50px;
-    height: fixed;
-    padding: 3px, 1px;
-  }
-
-  th{
-    width: auto;
-    height: 30px;
-    height: fixed;
-    padding: 3px, 1px;
-
-  }
+tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(odd){background-color: white}
   
-  tr:nth-child(even){background-color: #f2f2f2}
-  tr:nth-child(odd){background-color: white}
-  
-  th {
-    background-color: black;
-    color: white;
-    padding: 15px;
-    height: fixed;
-  }
+th {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  height: fixed;
+}
 
-  .urgent {
-    background-color: #ee3d0c !important;
-  }
+/* different table cell colours depending on tag of ToDo */
+.urgent{
+  background-color: #ee3d0c !important;
+}
 
-  .delete{
-    background-color: #ee3d0c !important;
-    border-radius: 25px;
-  }
+.delete {
+  background-color: #ee3d0c !important;
+  border-radius: 25px;
+}
 
-  .normal {
-    background-color: #FFFF66 !important;
-  }
+.normal {
+  background-color: #FFFF66 !important;
+}
 
-  .low {
-    background-color: #9ACD32 !important;
-  }
+.low {
+  background-color: #9ACD32 !important;
+}
 
-  .edit {
-    background-color: #9ACD32 !important;
-    border-radius: 25px;
+.edit {
+  background-color: #9ACD32 !important;
+  border-radius: 25px;
 
-  }
+}
 
-  .new{
-    border-radius: 25px;
-    background-color: #FFFF66 !important;
-
-  }
-
-
-
-
-  /* .container3{
-    margin-top: 1.5cm;
-
-    width: 100%;
-    height: 100%;
-    
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-  } */
-
+.new {
+  border-radius: 25px;
+  background-color: #FFFF66 !important;
+}
 
 .input
 {
@@ -88,14 +69,11 @@ table {
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	width: 80%;
-	
-	
 	font: 95% Arial, Helvetica, sans-serif;
 }
-.input:focus
 
+.input:focus
 {
   box-shadow: 0 0 5px black;
-  padding: 1%;
-	
+  padding: 0.2%;
 }

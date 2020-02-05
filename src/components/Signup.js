@@ -31,11 +31,10 @@ handleChange = (event) => {
     this.props.history.push(`/todos`);
 }
 
-handleSubmit = (event) => {
+  handleSubmit = (event) => {
   
     event.preventDefault()
     const {username, email, password, password_confirmation, admin} = this.state
-    // const {username, email, password, password_confirmation} = this.state
     let user = {
       username: username,
       email: email,
@@ -63,7 +62,6 @@ handleSubmit = (event) => {
            this.handleLogin();
           }
         })
-        // to reimplement error catching
         .catch(error => console.log('api errors:', error))
   }
 
@@ -77,9 +75,7 @@ handleSubmit = (event) => {
 handleErrors = () => {
     return (
       <div>
-        {/* <ul>{this.state.errors.map((error) => {
-          return <span key={error}>{error}<br></br></span>
-        })}</ul>  */}
+        {/* only one kind of error is possible */}
         {this.state.errors[0]}
       </div>
     )
@@ -136,12 +132,8 @@ return (
           <div class = "errors" >
           {this.state.errors ? this.handleErrors() : null}
           </div>
-
           
-      
         </form>
-        
-          
         
       </div>
       

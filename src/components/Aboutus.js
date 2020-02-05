@@ -4,7 +4,7 @@ import Logo from './image2.jpg';
 import { faStickyNote } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
+// page to introduce ToDo App
 const AboutUs = (props) => {
 
 return (
@@ -16,8 +16,6 @@ return (
         <h2> The ToDo App is a hassle-free way of keeping track of tasks. We provide both user and admin roles for companies and their customers.</h2>
         <h2> To find out more, contact chrystalquek@gmail.com </h2>
         
-        
-
       </div>
       
       </div>

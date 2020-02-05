@@ -4,8 +4,6 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import './Popup.css'
 
-
-
 class edituser extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +14,6 @@ class edituser extends Component {
      };
 
      this.handleTagChange = this.handleTagChange.bind(this);
-     
   }
 
 
@@ -24,26 +21,19 @@ class edituser extends Component {
     const token = localStorage.getItem("token")
     
     axios.get(process.env.REACT_APP_API_ENDPOINT + `/users/${this.props.userid}`,  { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
+      .then(response => {
 
-              const user = response.data.user;
-              
-
-              this.setState({
-                username: user.username,
-                email: user.email,
-                admin: user.admin
-              })
-
-
-                
-            })
-
-      
+        const user = response.data.user;
+        this.setState({
+          username: user.username,
+          email: user.email,
+          admin: user.admin
+        })
+      })
   }
 
 
-handleChange = (event) => {
+  handleChange = (event) => {
     const {name, value} = event.target
     this.setState({
       [name]: value
@@ -56,7 +46,7 @@ handleChange = (event) => {
   }
 
   
-handleSubmit = (event) => {
+  handleSubmit = (event) => {
   
     event.preventDefault()
     const {username, email, admin} = this.state
@@ -68,44 +58,33 @@ handleSubmit = (event) => {
         admin: admin
     }
 
-    
-
     const token = localStorage.getItem("token")
     
     axios.put(process.env.REACT_APP_API_ENDPOINT + `/users/${this.props.userid}`, {user}, { headers: {"Authorization" : `Bearer ${token}`} })
-            .then(response => {
+      .then(response => {
 
-              if (response.data.errors) {
-                console.log(response.data.errors)
-            
-                this.setState({errors: response.data.errors});
+        if (response.data.errors) {
+          console.log(response.data.errors)
       
-              } else {
+          this.setState({errors: response.data.errors});
 
-
-                this.props.closePopup(0)();
-
-
-                this.props.refresh(user);
-                
-                
-              }
-                
-            })
-       
+        } else {
+          this.props.closePopup(0)();
+          this.props.refresh(user);         
+        }               
+      })
         
-    }
+  }
 
 
 
     handleTagChange(event) {
-  
-        this.setState({admin: event.target.value});
-      }
+      this.setState({admin: event.target.value});
+    }
     
 
 
-handleErrors = () => {
+  handleErrors = () => {
     return (
       <div>
         <ul>{this.state.errors.map((error) => {
@@ -145,8 +124,6 @@ return (
           </select>
         </label>
           
-
-        
           <button placeholder="submit" type="submit">
             Submit Changes
           </button>
@@ -157,21 +134,12 @@ return (
             <div className = "errors" >
           {this.state.errors ? this.handleErrors() : null}
           </div>
-
-          
-      
+   
         </form> 
-        
-        {/* <div>
-          {
-            this.state.errors ? this.handleErrors() : null
-          }
-        </div> */}
+
         </div>
       </div>
     );
   }
 }
 export default withRouter(edituser);
-
-//this.props.closePopup

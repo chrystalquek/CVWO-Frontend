@@ -13,80 +13,71 @@ class NavBar extends React.Component {
      };
   }
   componentDidMount() {
+    // before rendering, check if user is logged in and whether user is admin. This will change navbar options accordingly.
     this.setState({
       loggedIn: localStorage.getItem("token"),
       isAdmin: localStorage.getItem("isAdmin")
-
     })
-    
   }
     
 
     render() {    
   
-     
       return (
         <nav >
           <div className="navbar">
-            
-
+ 
             <ul>
-                <span className="goleft">
+              <span className="goleft">
              
-                <li >
+                {/* Link to Home exists regardless of login status */}
+                <li>
                   <Link to="/">Home</Link>
                 </li>
 
-                </span>
-                
-                
-          
+              </span>
+
           { 
         
             (!localStorage.getItem("token")) ? 
                 <span className="goright">
-                        <li className="goleft">
-                        <Link  to="/login">Login</Link>
-                        </li>
-                        <li className="goright">
-                        <Link  to="/signup">Signup</Link>
-                        </li>
+                    <li className="goleft">
+                      <Link  to="/login">Login</Link>
+                    </li>
+                    <li className="goright">
+                      <Link  to="/signup">Signup</Link>
+                    </li>
                 </span>
                 :
                 <span className="goright">
-                        <li className="goleft">
-                        <Link  to="/todos">Todos</Link>
-                        </li>
-                        <li className="goleft">
-                        <Link  to="/profile">My Profile</Link>
-                        </li>
+                    <li className="goleft">
+                      <Link  to="/todos">Todos</Link>
+                    </li>
+                    <li className="goleft">
+                      <Link  to="/profile">My Profile</Link>
+                    </li>
                         {
                           (localStorage.getItem("isAdmin"))
                           ?
                           <li className="goleft">
-                          <Link  to="/users">Users</Link>
+                            <Link  to="/users">Users</Link>
                           </li>
                           : null
                         }
                         <li className="goright">
-                        <Link  to="/logout" onClick={this.props.handleLogout} >Logout</Link>
+                         <Link  to="/logout" onClick={this.props.handleLogout} >Logout</Link>
                         </li>
                  </span>
-          }
+           }
                 <span className="right">
              
-                <li className="goleft">
-                  <Link to="/aboutus">About Us</Link>
-                </li>
+                  {/* Link to About Us exists regardless of login status */}
+                  <li className="goleft">
+                    <Link to="/aboutus">About Us</Link>
+                  </li>
 
                 </span>
-
-              
-
-
             </ul>
-            
-            
           </div>
         </nav>
       );

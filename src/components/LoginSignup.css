@@ -1,8 +1,4 @@
 
-
-
-
-
 .form-style-6{
 	font: 95% Arial, Helvetica, sans-serif;
 	width: 400px;
@@ -13,10 +9,9 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    /* bring your own prefixes */
 	transform: translate(-50%, -50%);
-
 }
+
 .form-style-6 h1{
 	background: #43D1AF;
 	padding: 20px 0;
@@ -29,7 +24,6 @@
 
 
 .form-style-6 h2{
-	
 	padding: 4px 0;
 	font-size: 100%;
 	font-weight: 100;
@@ -62,7 +56,6 @@
 	margin-bottom: 4%;
 	border: 1px solid #ccc;
 	padding: 3%;
-	
 	font: 95% Arial, Helvetica, sans-serif;
 }
 
@@ -82,7 +75,6 @@
 	padding: 3%;
 	text-align: center;
 	margin-left: 25%;
-	
 	font: 95% Arial, Helvetica, sans-serif;
 }
 
@@ -97,7 +89,6 @@
 .form-style-6 input[type="url"]:focus,
 .form-style-6 textarea:focus,
 .form-style-6 select:focus
-
 {
 	box-shadow: 0 0 5px #43D1AF;
 	padding: 3%;
@@ -128,40 +119,26 @@
 	background: #2EBC99;
 }
 
-
+/* 
+different errors / notifications are displayed / positioned differently -> optimised for Macbook Pro13 
+*/
 .form-style-6 div.errors{
-    
-	
 	color: red;
 	margin-right: 0%;
-	
 	text-align: center;
-   
-
 } 
 
 
-
 .form-style-6 div.loginerrors{
-    
-	
 	color: red;
 	margin-right: 8%;
-	
 	text-align: center;
-   
-
 } 
 
 
 
 .form-style-6 div.update{
-    
-	
 	color: black;
 	margin-right: 2%;
-	
 	text-align: center;
-   
-
 } 
