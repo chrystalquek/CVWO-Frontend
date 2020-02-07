@@ -126,11 +126,13 @@ class EditUser extends Component {
 
             {/* clicking on this button will display a popup to reconfirm deletion of account */}
 
-            <button type="submit" onClick={this.toggleDeletePopup}>
-              <FontAwesomeIcon icon={faTrashAlt} /> Alternatively, Delete
-              Account.
-            </button>
+            
           </form>
+            <button type="submit" onClick={this.toggleDeletePopup}>
+                <FontAwesomeIcon icon={faTrashAlt} /> Alternatively, Delete
+                Account.
+            </button>
+
         </div>
         {/* if button has been clicked on, display popup */}
         {this.state.showDeletePopup ? (
