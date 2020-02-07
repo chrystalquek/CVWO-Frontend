@@ -78,6 +78,7 @@ render() {
         <div className="form-style-6">
 
         <h1>Log In</h1>
+        {/* only need to login with username and password, adding email field for authentication also possible */}
         <form onSubmit={this.handleSubmit}>
           <input
             placeholder="username"
@@ -101,6 +102,7 @@ render() {
           </h2>
           
           </form>
+          {/* display default error message if login is unsuccessful*/}
           <div className = "loginerrors">
           {
             this.state.errors ? this.handleErrors() : null

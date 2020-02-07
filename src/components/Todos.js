@@ -1,3 +1,5 @@
+// import edit, new and delete popups 
+// import icons
 import React, { Component } from 'react';
 import EditPopup from "./EditTodo"
 import NewPopup from "./NewTodo"
@@ -7,9 +9,10 @@ import Logo from './image.jpg';
 import { faEdit, faTrashAlt, faSort, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// jsonQuery to access fields like title, description...
+// jsonQuery to access fields of Todo
 var jsonQuery = require('json-query')
 
+// todos contains all todos, filtered contains todos based on user's search
 class Todos extends Component {
     constructor(props) {
       super(props);
@@ -25,12 +28,12 @@ class Todos extends Component {
        this.handleSearch = this.handleSearch.bind(this);
     }
 
-
+// before rendering Todos table, retrieve all Todos of the user from database
   componentDidMount() {
     this.refreshPage();
   }
    
-  // render inputted fields
+  // render updated fields
   handleChange = (event) => {
       const {name, value} = event.target
       this.setState({
@@ -60,7 +63,9 @@ class Todos extends Component {
     }
   )}
 
-  // general way to refreshPage to obtain updated todos
+  // general way to refresh page to obtain updated todos
+  // this method can be used each time a Todo is created, updated or deleted
+  // but to minimise API calls, array manipulations are done instead (below)
     refreshPage = () => {
         const token = localStorage.getItem("token")
         const userid = localStorage.getItem("userid")
@@ -156,6 +161,7 @@ class Todos extends Component {
   sortby = (factor) => () => {
     
     let newList = this.state.filtered;
+    // duedate field is sorted differently from other fiels - new dates are created for comparison
     if (factor == "duedate") {
         // check boolean which determines which ascending or descending
         if (this.state.sortorder) {
@@ -238,9 +244,10 @@ handleErrors = () => {
 
   renderTableData() {
     
-
+    // create array from filtered Todos
     let todos = Array.from(this.state.filtered)
 
+    // use jsonQuery to retrieve fields of each Todo
     var id = jsonQuery('[*][id]', { data: this.state.filtered }).value
     var title = jsonQuery('[*][title]', { data: this.state.filtered }).value
     var description = jsonQuery('[*][description]', { data: this.state.filtered }).value
@@ -248,7 +255,7 @@ handleErrors = () => {
     var category = jsonQuery('[*][category]', { data: this.state.filtered }).value
     var duedate = jsonQuery('[*][duedate]', { data: this.state.filtered }).value
     
-
+    // map across Todo array
     return todos.map((TODO, i) => {
        
        return (
@@ -256,6 +263,7 @@ handleErrors = () => {
             
              <td>{title[i]}</td>
              <td>{description[i]}</td>
+             {/* display different coloured table cells based on urgency of Todo */}
              { 
                (tag[i] == "Urgent")
               ? <td className="urgent">{tag[i]}</td>
@@ -267,13 +275,14 @@ handleErrors = () => {
             }
              
              <td>{category[i]}</td>
+             {/* display a more readable form for due date */}
              <td>{duedate[i].substr(0,10) + "  " + duedate[i].substr(11,8)}</td>
             <td>
 
              <button className ="delete" onClick={this.toggleDeletePopup(id[i])}> <FontAwesomeIcon icon={faTrashAlt} /> {' '}Delete </button>  
              
             
-
+            {/* display delete popup, pass id of todo, toggling function, and refreshing to DeletePopup component */}
             {this.state.showDeletePopup === id[i]?  
             <DeletePopup  
                     todoid={id[i]}
@@ -285,24 +294,25 @@ handleErrors = () => {
             }
              <button className = "edit" onClick={this.toggleEditPopup(id[i])}> <FontAwesomeIcon icon={faEdit} /> {' '}Edit </button>  
              
-                    {this.state.showEditPopup === id[i]?  
-                    <EditPopup  
-                            todoid={id[i]}
-                            closePopup={this.toggleEditPopup.bind(this)} 
-                            refresh={this.handleEdit.bind(this)}
-                    />  
-                    : null  
-                    }  </td>
+            {this.state.showEditPopup === id[i]?  
+            <EditPopup  
+                    todoid={id[i]}
+                    closePopup={this.toggleEditPopup.bind(this)} 
+                    refresh={this.handleEdit.bind(this)}
+            />  
+            : null  
+            }  </td>
           </tr>
        )
     })
  }
 
  renderTableHeader() {
+    // displayed headers are capitalised, stored headers are lowercase
     let header = [["Title", "title"], ["Description", "description"], ["Tag", "tag"], ["Category", "category"], 
       ["Due Date", "duedate"], ["Options", "options"]]
     return header.map((key, index) => {
-
+      // only Options cannot be sorted
       if (key[0] !== "Options" ) {
         return <th key={index}>{key[0]} <button onClick={this.sortby(key[1])}> <FontAwesomeIcon icon={faSort} /> </button>  </th>
 
@@ -312,10 +322,11 @@ handleErrors = () => {
     })
  }
 
+ // search bar and add new button are the first row of the ToDos table
  renderTableOptions() {
  return [<th key="search" colSpan="5"><input type="text" className="input" onChange={this.handleSearch} placeholder="Search tag..." /></th>,
  <th key="new">
-   
+   {/* Add a new ToDo */}
    <button className = "new" onClick={this.toggleNewPopup}>
    <FontAwesomeIcon icon={faPlus} /> {' '}Add New </button> 
 
