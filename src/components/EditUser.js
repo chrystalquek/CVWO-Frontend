@@ -101,7 +101,7 @@ class EditUser extends Component {
     const { title, description, tag, category, duedate } = this.state;
     return (
       <div className="popup">
-        <div className="popup_inner" height = "30%">
+        <div className="popup_inner" height = "10%">
           <h1>Edit User</h1>
           <form onSubmit={this.handleSubmit}>
             <input

@@ -83,12 +83,11 @@ class NewUser extends Component {
 
   render() {
     const { username, email, password, password_confirmation } = this.state;
-    console.log("newuser")
     return (
       <div className="popup">
-        {/* a new user must have a username, email and password */}
         <div className="popup_inner">
           <h1>New User</h1>
+          {/* a new user must have a username, email and password */}
           <form onSubmit={this.handleSubmit}>
             <input
               placeholder="username"
@@ -134,7 +133,7 @@ class NewUser extends Component {
               Let's Sign Up!
             </button>
 
-            <button type="submit" onClick={this.props.closePopup()}>
+            <button type="submit" onClick={this.props.closePopup}>
               Close
             </button>
 
