@@ -19,9 +19,6 @@ class NewUser extends Component {
     
   }
 
-  componentDidMount(){
-    console.log("newuser");
-  }
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -86,6 +83,7 @@ class NewUser extends Component {
 
   render() {
     const { username, email, password, password_confirmation } = this.state;
+    console.log("newuser")
     return (
       <div className="popup">
         {/* a new user must have a username, email and password */}
@@ -136,7 +134,7 @@ class NewUser extends Component {
               Let's Sign Up!
             </button>
 
-            <button type="submit" onClick={this.props.closePopup(0)}>
+            <button type="submit" onClick={this.props.closePopup()}>
               Close
             </button>
 
