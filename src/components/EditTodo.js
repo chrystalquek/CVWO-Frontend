@@ -202,7 +202,7 @@ class EditTodo extends Component {
 
             {/* if user decides not to edit the Todo, he can close the popup */}
             <button type="submit" onClick={this.props.closePopup(0)}>
-              close me
+              Close
             </button>
 
             <div className="errors">

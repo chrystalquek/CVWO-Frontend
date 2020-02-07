@@ -55,6 +55,7 @@ class Users extends Component {
   };
 
   toggleNewPopup = () => {
+    console.log("toggle");
     this.setState({
       showNewPopup: !this.state.showNewPopup
     });

@@ -101,7 +101,7 @@ class EditUser extends Component {
     const { title, description, tag, category, duedate } = this.state;
     return (
       <div className="popup">
-        <div className="popup_inner">
+        <div className="popup_inner" height = "30%">
           <h1>Edit User</h1>
           <form onSubmit={this.handleSubmit}>
             <input
@@ -132,7 +132,7 @@ class EditUser extends Component {
 
             {/* if admin decides not to edit user details, he can close the popup */}
             <button type="submit" onClick={this.props.closePopup(0)}>
-              close me
+              Close
             </button>
 
             <div className="errors">

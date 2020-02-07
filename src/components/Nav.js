@@ -62,7 +62,7 @@ class NavBar extends React.Component {
                 </li>
               </span>
             )}
-            <span className="goright">
+            <span className="goleft">
               {/* Link to About Us exists regardless of login status */}
               <li className="goleft">
                 <Link to="/aboutus">About Us</Link>
