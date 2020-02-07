@@ -16,6 +16,7 @@ class NewUser extends Component {
       errors: []
     };
     this.handleAdminChange = this.handleAdminChange.bind(this);
+    console.log("newuser");
   }
   handleChange = event => {
     const { name, value } = event.target;

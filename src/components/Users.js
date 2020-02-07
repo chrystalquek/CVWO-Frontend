@@ -55,7 +55,6 @@ class Users extends Component {
   };
 
   toggleNewPopup = () => {
-    console.log("toggle");
     this.setState({
       showNewPopup: !this.state.showNewPopup
     });
@@ -315,8 +314,6 @@ class Users extends Component {
         </button>
 
 
-        {this.state.showNewPopup ? console.log("toggled"): null}
-
         {this.state.showNewPopup ? (
           
           <NewPopup
@@ -327,6 +324,16 @@ class Users extends Component {
       </th>
     ];
   }
+
+
+  // {this.state.showDeletePopup === id[i] ? (
+  //   <DeletePopup
+  //     userid={id[i]}
+  //     closePopup={this.toggleDeletePopup.bind(this)}
+  //     refresh={this.handleDelete.bind(this)}
+  //   />
+  // ) : null}
+
 
   render() {
     return (
