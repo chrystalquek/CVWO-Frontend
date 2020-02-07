@@ -239,7 +239,7 @@ class Users extends Component {
             {id[i] == localStorage.getItem("userid") ? null : (
               <span>
                 {/* display delete popup, pass id of todo, toggling function, and refreshing to DeletePopup component */}
-                <button onClick={this.toggleDeletePopup(id[i])}>
+                <button className ="delete" onClick={this.toggleDeletePopup(id[i])}>
                   {" "}
                   <FontAwesomeIcon icon={faTrashAlt} /> Delete{" "}
                 </button>
@@ -253,10 +253,11 @@ class Users extends Component {
                 ) : null}
               </span>
             )}
-            <button onClick={this.toggleEditPopup(id[i])}>
+            <button className = "edit" onClick={this.toggleEditPopup(id[i])}>
               {" "}
               <FontAwesomeIcon icon={faEdit} /> Edit{" "}
             </button>
+            {/* ensure that user that is logged in cannot delete his own account */}
             {this.state.showEditPopup === id[i] ? (
               <EditPopup
                 userid={id[i]}
@@ -309,11 +310,15 @@ class Users extends Component {
       </th>,
       <th key="new">
         {/* Add a new User */}
-        <button onClick={this.toggleNewPopup}>
+        <button className = "new" onClick={this.toggleNewPopup}>
           <FontAwesomeIcon icon={faPlus} /> Add New{" "}
         </button>
 
+
+        {this.state.showNewPopup ? console.log("toggled"): null}
+
         {this.state.showNewPopup ? (
+          
           <NewPopup
             closePopup={this.toggleNewPopup.bind(this)}
             refresh={this.handleAdd.bind(this)}
